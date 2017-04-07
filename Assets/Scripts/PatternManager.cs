@@ -28,7 +28,7 @@ public class PatternManager : MonoBehaviour
     }
     public PatternType currentpattern;
 
-    public List<Slot> CheckForPattern(List<Slot> slots)
+    public List<Slot> CheckForPattern(ref List<Slot> slots)
     {
         switch (currentpattern)
         {
@@ -45,6 +45,7 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y));
                             Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y));
                             Result.Add(slots.Find(s => s.x == slot.x + 3 && s.y == slot.y));
+                            slots.Clear();
                             return Result;
                         }
                     }
@@ -63,6 +64,7 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x && s.y == slot.y + 1));
                             Result.Add(slots.Find(s => s.y == slot.y + 2 && s.x == slot.x));
                             Result.Add(slots.Find(s => s.x == slot.x && s.y == slot.y + 3));
+                            slots.Clear();
                             return Result;
                         }
                     }
@@ -82,6 +84,7 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y - 1));
                             Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y));
                             Burst(Result);
+                            slots.Clear();
                             return Result;
                         }
                     }
@@ -101,6 +104,7 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 1));
                             Result.Add(slots.Find(s => s.x == slot.x && s.y == slot.y + 2));
                             Burst(Result);
+                            slots.Clear();
                             return Result;
                         }
                     }
@@ -120,6 +124,7 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 1));
                             Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y));
                             Burst(Result);
+                            slots.Clear();
                             return Result;
                         }
                     }
@@ -139,6 +144,7 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x - 1 && s.y == slot.y + 1));
                             Result.Add(slots.Find(s => s.x == slot.x && s.y == slot.y + 2));
                             Burst(Result);
+                            slots.Clear();
                             return Result;
                         }
                     }
@@ -157,6 +163,7 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y));
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 1));
                             Result.Add(slots.Find(s => s.x == slot.x && s.y == slot.y + 1));
+                            slots.Clear();
                             return Result;
                         }
                     }
@@ -175,6 +182,7 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x - 1 && s.y == slot.y));
                             Result.Add(slots.Find(s => s.x == slot.x - 1 && s.y == slot.y + 1));
                             Result.Add(slots.Find(s => s.x == slot.x - 1 && s.y == slot.y + 2));
+                            slots.Clear();
                             return Result;
                         }
                     }
@@ -193,6 +201,7 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y));
                             Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y));
                             Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y + 1));
+                            slots.Clear();
                             return Result;
                         }
                     }
@@ -211,6 +220,7 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y));
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y - 1));
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y - 2));
+                            slots.Clear();
                             return Result;
                         }
                     }
@@ -229,6 +239,7 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x && s.y == slot.y + 1));
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 1));
                             Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y + 1));
+                            slots.Clear();
                             return Result;
                         }
                     }
@@ -247,6 +258,7 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y));
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 1));
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 2));
+                            slots.Clear();
                             return Result;
                         }
                     }
@@ -265,6 +277,7 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y));
                             Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y));
                             Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y - 1));
+                            slots.Clear();
                             return Result;
                         }
                     }
@@ -283,6 +296,7 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x && s.y == slot.y + 1));
                             Result.Add(slots.Find(s => s.x == slot.x && s.y == slot.y + 2));
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 2));
+                            slots.Clear();
                             return Result;
                         }
                     }
@@ -301,6 +315,7 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x && s.y == slot.y - 1));
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y - 1));
                             Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y - 1));
+                            slots.Clear();
                             return Result;
                         }
                     }
@@ -320,6 +335,7 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 1));
                             Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y + 1));
                             Burst(Result);
+                            slots.Clear();
                             return Result;
                         }
                     }
@@ -339,6 +355,7 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x - 1 && s.y == slot.y + 1));
                             Result.Add(slots.Find(s => s.x == slot.x - 1 && s.y == slot.y + 2));
                             Burst(Result);
+                            slots.Clear();
                             return Result;
                         }
                     }
@@ -358,6 +375,7 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y - 1));
                             Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y - 1));
                             Burst(Result);
+                            slots.Clear();
                             return Result;
                         }
                     }
@@ -377,6 +395,7 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 1));
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 2));
                             Burst(Result);
+                            slots.Clear();
                             return Result;
                         }
                     }

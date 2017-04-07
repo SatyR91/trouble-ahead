@@ -16,6 +16,8 @@ public class Slot : MonoBehaviour
     void Awake()
     {
         meshRender.material.EnableKeyword("_EMISSION");
+        x = Mathf.FloorToInt(transform.position.x / 2);
+        y = Mathf.FloorToInt(-transform.position.z / 2);
     }
 
     // Update is called once per frame
@@ -109,7 +111,7 @@ public class Slot : MonoBehaviour
         PlayCaptureAnimation(p);
         p.gameObject.GetComponent<PlayerControl>().SetBoost(true);
         p.GetComponent<Player>().patternslots.Add(this);
-        List<Slot> patternslot = GetComponentInParent<PatternManager>().CheckForPattern(p.GetComponent<Player>().patternslots);
+        List<Slot> patternslot = GetComponentInParent<PatternManager>().CheckForPattern(ref p.GetComponent<Player>().patternslots);
     }
 
     void Contest()

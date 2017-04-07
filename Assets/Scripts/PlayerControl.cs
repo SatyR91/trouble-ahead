@@ -13,9 +13,9 @@ public class PlayerControl : MonoBehaviour
 
     internal void SetAxisName(int id)
     {
-        leftXAxis = "Horizontal_P" + id;
-        leftYAxis = "Vertical_P" + id;
-        fire1 = "Fire1_P" + id;
+        leftXAxis = "L_XAxis_" + id;
+        leftYAxis = "L_YAxis_" + id;
+        fire1 = "RB_" + id;
     }
 
     public float deadZone;

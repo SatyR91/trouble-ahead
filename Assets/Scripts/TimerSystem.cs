@@ -17,17 +17,16 @@ public class TimerSystem : MonoBehaviour {
     }
     // Update is called once per frame
     void Update () {
-		if(Time.time > timeLeft && !timerDone)
+		if(Time.time-timeStarted > timeLeft && !timerDone)
         {
             timerDone = true;
             TimerGUI.text = "Round over !";
             FindObjectOfType<ScoreManager>().TallyScores();
             FindObjectOfType<ScoreManager>().BestPlayer();
         }
-        else if (timeLeft - Time.time >0)
+        else if (timeLeft - (Time.time-timeStarted) >0)
         {
-            int castedTime = (int)(timeLeft - Time.time);
-            TimerGUI.text = castedTime.ToString();
+            TimerGUI.text = Mathf.CeilToInt(timeLeft - (Time.time-timeStarted)).ToString();
         }
 	}
 }

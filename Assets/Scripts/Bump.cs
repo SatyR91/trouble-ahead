@@ -24,7 +24,7 @@ public class Bump : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        collidingObjects.Add(other.gameObject);
+        collidingObjects.Remove(other.gameObject);
     }
 
     public void TriggerBump()

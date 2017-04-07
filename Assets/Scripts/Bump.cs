@@ -8,10 +8,14 @@ public class Bump : MonoBehaviour
     // Use this for initialization
     public float radius;
     public float power = 2.0F;
+
+    public float superRadius = 30f;
+    public float superPower = 100f;
     public ParticleSystem[] bumperAnimations;
     private ParticleSystem particleSystem;
     List<GameObject> collidingObjects;
     GameObject owner;
+    public bool superBump = false;
 
     private void Awake()
     {
@@ -40,7 +44,14 @@ public class Bump : MonoBehaviour
 
     public void TriggerBump()
     {
-        //Debug.Log("BUMP!");
+        float normalPower = power;
+        float normalRadius = radius;
+
+        if (superBump)
+        {
+            power = superPower;
+            radius = superRadius;
+        }
         Vector3 explosionPos = transform.position;
         PlayBumpAnimation();
         foreach (GameObject hit in collidingObjects)
@@ -55,10 +66,17 @@ public class Bump : MonoBehaviour
 
             //rb.AddExplosionForce(power, explosionPos, radius, 0f, ForceMode.Impulse);
         }
+        if (superBump)
+        {
+            radius = normalRadius;
+            power = normalPower;
+            superBump = false;
+        }
     }
 
     public void PlayBumpAnimation()
     {
         particleSystem.Play();
     }
+
 }

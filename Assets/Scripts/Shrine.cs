@@ -9,6 +9,8 @@ public class Shrine : MonoBehaviour
 
     public bool activated = false;
 
+    public int newCaptureSpeed = 2;
+
 
     // Use this for initialization
     void Awake()
@@ -27,7 +29,10 @@ public class Shrine : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             // speedCapture
-            ActivateCaptureBoost(other.gameObject.GetComponent<Player>());
+            //ActivateCaptureBoost(other.gameObject.GetComponent<Player>());
+
+            // superBump
+            ActivateBumpBoost(other.gameObject.GetComponentInChildren<Player>());
             Debug.Log("Boost Activated !");
         }
     }
@@ -36,7 +41,7 @@ public class Shrine : MonoBehaviour
     void ActivateCaptureBoost(Player p)
     {
         int normalCaptureSpeed = p.captureSpeed;
-        p.captureSpeed = 2;
+        p.captureSpeed = newCaptureSpeed;
         StartCoroutine(CaptureBoostCoroutine(2, p, normalCaptureSpeed));
     }
 
@@ -50,7 +55,6 @@ public class Shrine : MonoBehaviour
     void ActivateBumpBoost(Player p)
     {
         Bump bump = p.transform.GetComponentInChildren<Bump>();
-        float normalRadius = bump.radius;
-        float normalPower = bump.power;
+        bump.superBump = true;
     }
 }

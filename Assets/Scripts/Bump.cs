@@ -10,14 +10,16 @@ public class Bump : MonoBehaviour
 
     public void TriggerBump()
     {
+        Debug.Log("BUMP!");
         Vector3 explosionPos = transform.position;
-        Collider[] colliders = Physics.OverlapSphere(explosionPos, radius);
+        LayerMask mask = 1 << LayerMask.NameToLayer("Player");
+        Collider[] colliders = Physics.OverlapSphere(explosionPos, radius, mask);
         foreach (Collider hit in colliders)
         {
             Rigidbody rb = hit.GetComponent<Rigidbody>();
 
-            if (rb != null && !rb.gameObject.Equals(transform.gameObject) && rb.CompareTag("Player"))
-                rb.AddExplosionForce(power, explosionPos, radius, 3.0F);
+            if (rb != null && !rb.gameObject.Equals(transform.gameObject))
+                rb.AddExplosionForce(power, explosionPos, radius);
         }
     }
 }

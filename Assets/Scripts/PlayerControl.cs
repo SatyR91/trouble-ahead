@@ -10,6 +10,9 @@ public class PlayerControl : MonoBehaviour
     //public string rightXAxis;
     //public string rightYAxis;
     public string fire1;
+    public float bumpCoolDown;
+    public float lastBumpTime;
+    public Bump bump;
 
     internal void SetAxisName(int id)
     {
@@ -27,8 +30,10 @@ public class PlayerControl : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        bump = GetComponent<Bump>();
         //float idealDrag = acceleration / maxVelocity;
         //rb.drag = idealDrag / (idealDrag * Time.fixedDeltaTime + 1);
+        lastBumpTime = Time.time;
     }
 
     // Update is called once per frame
@@ -65,9 +70,19 @@ public class PlayerControl : MonoBehaviour
             rb.velocity = rb.velocity + trueAcceleration * Vector3.back;
             Debug.Log("Down");
         }
+        if (Input.GetAxis(fire1) > 0f)
+        {
+            if (Time.time - lastBumpTime > bumpCoolDown)
+            {
+                bump.TriggerBump();
+                lastBumpTime = Time.time;
+            }
+        }
+        rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxVelocity);
         //if (!hasInput)
         //{
         //    rb.AddForce(Vector3.zero, ForceMode.VelocityChange);
         //}
     }
+    public float bumpaxis;
 }

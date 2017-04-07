@@ -58,9 +58,13 @@ public class PlayerControl : MonoBehaviour
     private void FixedUpdate()
     {
         if (isStunned && stunEndTime <= Time.time)
+        {
             isStunned = false;
+        }
         if (isStunned)
+        {
             return;
+        }
         trueAcceleration = acceleration / Time.fixedDeltaTime;
         //hasInput = false;
         Vector3 force = Vector3.zero;

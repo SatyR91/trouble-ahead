@@ -14,6 +14,7 @@ public class Slot : MonoBehaviour
     public int captureLength = 120;
     public MeshRenderer meshRender;
     public ColorUsageAttribute test;
+    private TimerSystem timersys;
     // Use this for initialization
     void Awake()
     {
@@ -23,7 +24,8 @@ public class Slot : MonoBehaviour
         DynamicGI.SetEmissive(meshRender, glowMaterials[0].color);
         //meshRender.material.EnableKeyword("_EMISSION");
         x = Mathf.FloorToInt(transform.position.x / 2);
-        y = Mathf.FloorToInt(-transform.position.z / 2);
+        y = Mathf.FloorToInt(transform.position.z / 2);
+        timersys = GetComponentInParent<TimerSystem>();
     }
 
     // Update is called once per frame
@@ -112,7 +114,11 @@ public class Slot : MonoBehaviour
     {
         //meshRender.material.SetColor("_EmissionColor", p.color);
         Capture(p);
-        List<Slot> patternslot = GetComponentInParent<PatternManager>().CheckForPattern(ref p.GetComponent<Player>().patternslots);
+        if (timersys.patternTime)
+        {
+            p.GetComponent<Player>().patternslots.Add(this);
+            GetComponentInParent<PatternManager>().CheckForPattern(ref p.GetComponent<Player>().patternslots);
+        }
     }
 
     void Contest()

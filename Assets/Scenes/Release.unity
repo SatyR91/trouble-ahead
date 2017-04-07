@@ -452,48 +452,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5fadcec075ad5314bbfc60fdddb852b8, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &81060330
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 81060332}
-  - component: {fileID: 81060331}
-  m_Layer: 0
-  m_Name: TimerSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &81060331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 81060330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e2c02858b3a9f8418a24c492c8cfaf3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeLeft: 150
-  TimerGUI: {fileID: 560800595}
---- !u!4 &81060332
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 81060330}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 483.57956, y: 293.51837, z: -4.5612793}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &83922116
 Prefab:
   m_ObjectHideFlags: 0
@@ -8748,6 +8706,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1670260514}
   - component: {fileID: 1670260515}
+  - component: {fileID: 1670260516}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -8923,7 +8882,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ca8e1c3f926c0c409aee170175a38c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentpattern: 0
+  currentpattern: 5
+  cleaningNeeded: 0
+--- !u!114 &1670260516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1670260513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e2c02858b3a9f8418a24c492c8cfaf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeLeft: 142
+  TimerGUI: {fileID: 560800595}
+  patternTime: 0
 --- !u!4 &1680744672 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4347874072019122, guid: 5fadcec075ad5314bbfc60fdddb852b8,
@@ -9559,7 +9533,7 @@ Transform:
   - {fileID: 1234734266}
   - {fileID: 301963016}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1816814692
 Prefab:

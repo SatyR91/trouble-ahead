@@ -10,12 +10,18 @@ public class Slot : MonoBehaviour
     public List<Player> players;
     public Player owner;
     public int captureTime = 0;
+    public List<Material> glowMaterials;
     public int captureLength = 120;
     public MeshRenderer meshRender;
+    public ColorUsageAttribute test;
     // Use this for initialization
     void Awake()
     {
-        meshRender.material.EnableKeyword("_EMISSION");
+        //meshRender.material.color = test.;
+        //meshRender.material.pro
+        meshRender.material = glowMaterials[0];
+        DynamicGI.SetEmissive(meshRender, glowMaterials[0].color);
+        //meshRender.material.EnableKeyword("_EMISSION");
         x = Mathf.FloorToInt(transform.position.x / 2);
         y = Mathf.FloorToInt(-transform.position.z / 2);
     }
@@ -23,7 +29,6 @@ public class Slot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         // Is already captured
         if (owner != null)
         {
@@ -53,8 +58,6 @@ public class Slot : MonoBehaviour
                 }
             }
         }
-
-
     }
 
     void OnTriggerEnter(Collider other)
@@ -93,7 +96,8 @@ public class Slot : MonoBehaviour
 
     public void Capture(Player p)
     {
-        meshRender.material.SetColor("_EmissionColor", p.color);
+        meshRender.material = glowMaterials[p.id];
+        DynamicGI.SetEmissive(meshRender, glowMaterials[p.id].color);
         owner = p;
         PlayCaptureAnimation(p);
         p.gameObject.GetComponent<PlayerControl>().SetBoost(true);
@@ -106,24 +110,20 @@ public class Slot : MonoBehaviour
 
     void PatternCapture(Player p)
     {
-        meshRender.material.SetColor("_EmissionColor", p.color);
-        owner = p;
-        PlayCaptureAnimation(p);
-        p.gameObject.GetComponent<PlayerControl>().SetBoost(true);
-        p.GetComponent<Player>().patternslots.Add(this);
+        //meshRender.material.SetColor("_EmissionColor", p.color);
+        Capture(p);
         List<Slot> patternslot = GetComponentInParent<PatternManager>().CheckForPattern(ref p.GetComponent<Player>().patternslots);
     }
 
     void Contest()
     {
-
         meshRender.material.SetColor("_EmissionColor", Color.black);
     }
 
     void Neutral()
     {
         owner = null;
-        meshRender.material.SetColor("_EmissionColor", Color.black);
+        meshRender.material = glowMaterials[0];
     }
 
     void PlayCaptureAnimation(Player p)

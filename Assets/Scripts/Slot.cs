@@ -33,6 +33,7 @@ public class Slot : MonoBehaviour
                 if (captureTime >= captureLength)
                 {
                     captureTime = 0;
+                    owner.patternslots.Remove(this);
                     Neutral();
                 }
             }
@@ -47,7 +48,7 @@ public class Slot : MonoBehaviour
                 captureTime++;
                 if (captureTime >= captureLength)
                 {
-                    Capture(players[0]);
+                    PatternCapture(players[0]);
                 }
             }
         }
@@ -93,6 +94,16 @@ public class Slot : MonoBehaviour
         owner = p;
         PlayCaptureAnimation(p);
         p.gameObject.GetComponent<PlayerControl>().acceleration += speedBoost;
+    }
+
+    void PatternCapture(Player p)
+    {
+        meshRender.material.SetColor("_EmissionColor", p.color);
+        owner = p;
+        PlayCaptureAnimation(p);
+        p.gameObject.GetComponent<PlayerControl>().acceleration += speedBoost;
+        p.GetComponent<Player>().patternslots.Add(this);
+        List<Slot> patternslot = GetComponentInParent<PatternManager>().CheckForPattern(p.GetComponent<Player>().patternslots);
     }
 
     void Contest()

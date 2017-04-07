@@ -22,6 +22,7 @@ public class TimerSystem : MonoBehaviour {
             timerDone = true;
             TimerGUI.text = "Round over !";
             FindObjectOfType<ScoreManager>().TallyScores();
+            FindObjectOfType<ScoreManager>().BestPlayer();
         }
         else if (timeLeft - Time.time >0)
         {

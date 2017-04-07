@@ -55,19 +55,21 @@ public class Slot : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        //if (other.name == "PlayerCenter")
         {
-            players.Add(other.GetComponent<Player>());
+            players.Add(other.transform.parent.GetComponent<Player>());
         }
     }
 
     void OnTriggerExit(Collider other)
     {
         // Remove player from players array
-        if (other.tag == "Player")
+        //if (other.name == "PlayerCenter")
         {
-            players.Remove(other.GetComponent<Player>());
+            players.Remove(other.transform.parent.GetComponent<Player>());
+        
         }
+
 
         // Reset capture time
         captureTime = 0;
@@ -77,6 +79,7 @@ public class Slot : MonoBehaviour
     {
         meshRender.material.SetColor("_EmissionColor", p.color);
         owner = p;
+        PlayCaptureAnimation(p);
     }
 
     void Contest()
@@ -89,5 +92,25 @@ public class Slot : MonoBehaviour
     {
         owner = null;
         meshRender.material.SetColor("_EmissionColor", Color.black);
+    }
+
+    void PlayCaptureAnimation(Player p)
+    {
+        switch (p.id) {
+            case 1: //green
+                transform.FindChild("Green FXCapture").GetComponent<ParticleSystem>().Play();
+                break;
+            case 2: //red
+                transform.FindChild("Red FXCapture").GetComponent<ParticleSystem>().Play();
+                break;
+            case 3: //blue
+                transform.FindChild("Blue FXCapture").GetComponent<ParticleSystem>().Play();
+                break;
+            case 4: //yellow
+                transform.FindChild("Yellow FXCapture").GetComponent<ParticleSystem>().Play();
+                break;
+            default:
+                break;
+        }
     }
 }

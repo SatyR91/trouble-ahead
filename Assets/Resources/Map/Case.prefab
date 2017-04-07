@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4931858183317488}
   - component: {fileID: 198178022971911476}
   - component: {fileID: 199504472506728358}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Red FXCapture
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4347874072019122}
   - component: {fileID: 65516403645552678}
   - component: {fileID: 114708943485016140}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Case
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4250845631565744}
   - component: {fileID: 198110385120931706}
   - component: {fileID: 199348349825509678}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Green FXCapture
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4386585036587104}
   - component: {fileID: 33209394360941676}
   - component: {fileID: 23303565917159336}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: pCube2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 4300539676758330}
   - component: {fileID: 198450268093998736}
   - component: {fileID: 199094133297556468}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Blue FXCapture
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 4851169975796254}
   - component: {fileID: 198825581830088996}
   - component: {fileID: 199107527218715538}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Yellow FXCapture
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 4639133648640318}
   - component: {fileID: 33972228233075540}
   - component: {fileID: 23169376493934124}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: pCube3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,7 +139,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4902483858536224}
   - component: {fileID: 95188957548312746}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Case 3DModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

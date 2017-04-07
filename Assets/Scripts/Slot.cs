@@ -126,7 +126,7 @@ public class Slot : MonoBehaviour
         meshRender.material.SetColor("_EmissionColor", Color.black);
     }
 
-    void Neutral()
+    public void Neutral()
     {
         owner = null;
         meshRender.material = glowMaterials[0];

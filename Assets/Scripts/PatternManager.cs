@@ -29,6 +29,9 @@ public class PatternManager : MonoBehaviour
     public PatternType currentpattern;
     public bool cleaningNeeded;
 
+
+    // Check Pattern
+
     public void CheckForPattern(ref List<Slot> slots)
     {
         cleaningNeeded = false;
@@ -159,6 +162,7 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y));
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 1));
                             Result.Add(slots.Find(s => s.x == slot.x && s.y == slot.y + 1));
+                            Defrag(Result);
                             GetComponent<TimerSystem>().patternTime = false; cleaningNeeded=true; break;
                         }
                     }
@@ -391,6 +395,8 @@ public class PatternManager : MonoBehaviour
             slots.Clear();
     }
 
+    // Boosts
+    
     void Burst(List<Slot> slots)
     {
         List<Slot> mapSlots = new List<Slot>(GetComponentsInChildren<Slot>());
@@ -402,7 +408,23 @@ public class PatternManager : MonoBehaviour
         Player newOwner = slots[0].owner;
         foreach (Slot slot in adjacentSlots)
         {
+            if (slot.owner == null)
             slot.Capture(newOwner);
+        }
+    }
+
+    void Defrag(List<Slot> slots)
+    {
+        List<Slot> mapSlots = new List<Slot>(GetComponentsInChildren<Slot>());
+        List<Slot> adjacentSlots = new List<Slot>();
+        foreach (Slot slot in slots)
+        {
+            adjacentSlots.AddRange(mapSlots.FindAll(x => x.SqrMagnitude(slot) <= 1f));
+        }
+        foreach (Slot slot in adjacentSlots)
+        {
+            if (slot.owner != null && slot.owner != slots[0].owner)
+                slot.Neutral();
         }
     }
 }

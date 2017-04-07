@@ -1,4 +1,22 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
+public class PlayerControl : MonoBehaviour
+{
+    public string leftXAxis;
+    public string leftYAxis;
+    public string rightXAxis;
+    public string rightYAxis;
+    public string fire1;
+    public float bumpCoolDown;
+    public float lastBumpTime;
+    public Bump bump;
+
+    private Vector3 turnVector;
+    public float turnSpeed = 5.0f;
+    private Vector2 RightStickInput;
     public float RightStickDeadzone = 0.02f;
     public float turnAxisThreshold = 0.1f;
 
@@ -78,7 +96,7 @@
         {
             bumpaxis = Input.GetAxis(fire1);
             bumpLock = true;
-            
+
             if (Time.time - lastBumpTime > bumpCoolDown)
             {
                 lastBumpTime = Time.time;
@@ -90,13 +108,14 @@
         }
         if (Input.GetButtonUp(fire1) && bumpLock)
             bumpLock = false;
-        if ((Time.time - lastBumpTime) < bumpCoolDown) {
+        if ((Time.time - lastBumpTime) < bumpCoolDown)
+        {
             Color transitionColor = Color.black + originalColor * (Time.time - lastBumpTime) / bumpCoolDown;
-            cooldown1.GetComponent<MeshRenderer>().materials[1].SetColor("_EmissionColor",transitionColor);
-            cooldown2.GetComponent<MeshRenderer>().materials[1].SetColor("_EmissionColor",transitionColor);
+            cooldown1.GetComponent<MeshRenderer>().materials[1].SetColor("_EmissionColor", transitionColor);
+            cooldown2.GetComponent<MeshRenderer>().materials[1].SetColor("_EmissionColor", transitionColor);
         }
-        
-        
+
+
 
 
 
@@ -108,11 +127,60 @@
         //    rb.AddForce(Vector3.zero, ForceMode.VelocityChange);
         //}
 
+        RightStickInput = new Vector2(Input.GetAxis(rightXAxis), Input.GetAxis(rightYAxis));
+        if (RightStickInput.magnitude < RightStickDeadzone)
+        {
+            RightStickInput = Vector2.zero;
+        }
+        else
+        {
+            RightStickInput = RightStickInput.normalized * ((RightStickInput.magnitude - RightStickDeadzone) / (1 - RightStickDeadzone));
+        }
+
+        if (RightStickInput.magnitude >= turnAxisThreshold)
+        {
+            turnVector.y = Mathf.Atan2(RightStickInput.x, -RightStickInput.y) * Mathf.Rad2Deg;
+            StartCoroutine(Turn());
+        }
+    }
+
+
+    IEnumerator Turn()
+    {
+
+        Quaternion oldRotation = transform.rotation;
+        Quaternion newRotation = new Quaternion();
+        newRotation.eulerAngles = turnVector;
+
+        for (float t = 0.0f; t < 1.0f; t += (turnSpeed * Time.deltaTime))
+        {
+            transform.rotation = Quaternion.Lerp(oldRotation, newRotation, t);
+            yield return null;
+        }
+
+    }
+
+
+
+
+    public void Stun()
+    {
+        isStunned = true;
+        stunEndTime = Time.time + stunLength;
+    }
+
+    public float bumpaxis;
+    private bool bumpLock;
+    private bool isStunned;
+    private float stunEndTime;
+    private float stunLength;
+    public bool isBoosted;
+    public float speedBoost;
     public void SetBoost(bool input)
     {
-        if(input)
+        if (input)
         {
-            if(!isBoosted)
+            if (!isBoosted)
             {
                 acceleration += speedBoost;
                 isBoosted = input;
@@ -120,19 +188,15 @@
         }
         else
         {
-            if(isBoosted)
+            if (isBoosted)
             {
                 isBoosted = false;
                 acceleration -= speedBoost;
             }
         }
     }
-    public float bumpaxis;
-    private bool bumpLock;
-    private bool isStunned;
-    private float stunEndTime;
-    private float stunLength;
 }
+
 
 //Color originalColor1 = cooldown1.GetComponent<MeshRenderer>().materials[1].GetColor("_EmissionColor");
 //cooldown1.GetComponent<MeshRenderer>().materials[1].SetColor("_EmissionColor", newColor1);

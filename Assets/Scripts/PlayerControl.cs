@@ -30,7 +30,7 @@ public class PlayerControl : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        bump = GetComponent<Bump>();
+        bump = GetComponentInChildren<Bump>();
         //float idealDrag = acceleration / maxVelocity;
         //rb.drag = idealDrag / (idealDrag * Time.fixedDeltaTime + 1);
         lastBumpTime = Time.time - bumpCoolDown - 1f;
@@ -40,6 +40,10 @@ public class PlayerControl : MonoBehaviour
     //public bool hasInput = false;
     private void FixedUpdate()
     {
+        if (isStunned && stunEndTime <= Time.time)
+            isStunned = false;
+        if (isStunned)
+            return;
         trueAcceleration = acceleration / Time.fixedDeltaTime;
         //hasInput = false;
         if (Input.GetAxis(leftXAxis) > deadZone)
@@ -70,19 +74,34 @@ public class PlayerControl : MonoBehaviour
             //rb.velocity = rb.velocity + trueAcceleration * Vector3.back;
             //Debug.Log("Down");
         }
-        if (Input.GetAxis(fire1) > 0f)
+        if (Input.GetButtonDown(fire1) && !bumpLock)
         {
+            bumpaxis = Input.GetAxis(fire1);
+            bumpLock = true;
             if (Time.time - lastBumpTime > bumpCoolDown)
             {
-                bump.TriggerBump();
                 lastBumpTime = Time.time;
+                bump.TriggerBump();
             }
         }
+        if (Input.GetButtonUp(fire1) && bumpLock)
+            bumpLock = false;
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxVelocity);
         //if (!hasInput)
         //{
         //    rb.AddForce(Vector3.zero, ForceMode.VelocityChange);
         //}
     }
+
+    public void Stun()
+    {
+        isStunned = true;
+        stunEndTime = Time.time + stunLength;
+    }
+
     public float bumpaxis;
+    private bool bumpLock;
+    private bool isStunned;
+    private float stunEndTime;
+    private float stunLength;
 }

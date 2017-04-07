@@ -1,22 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public class PlayerControl : MonoBehaviour
-{
-    public string leftXAxis;
-    public string leftYAxis;
-    public string rightXAxis;
-    public string rightYAxis;
-    public string fire1;
-    public float bumpCoolDown;
-    public float lastBumpTime;
-    public Bump bump;
-
-    private Vector3 turnVector;
-    public float turnSpeed = 5.0f;
-    private Vector2 RightStickInput;
     public float RightStickDeadzone = 0.02f;
     public float turnAxisThreshold = 0.1f;
 
@@ -36,25 +18,12 @@ public class PlayerControl : MonoBehaviour
     public float basicAcceleration;
     private float trueAcceleration;
     public float maxVelocity;
-    public void SetBoost(bool input)
-    {
-        if(input)
-        {
-            if(!isBoosted)
-            {
-                acceleration += speedBoost;
-                isBoosted = input;
-            }
-        }
-        else
-        {
-            if(isBoosted)
-            {
-                acceleration -= speedBoost;
-                isBoosted = false;
-            }
-        }
-    }
+
+
+    public GameObject cooldown1;
+    public GameObject cooldown2;
+    private Color originalColor;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -63,6 +32,7 @@ public class PlayerControl : MonoBehaviour
         //rb.drag = idealDrag / (idealDrag * Time.fixedDeltaTime + 1);
         lastBumpTime = Time.time - bumpCoolDown - 1f;
         basicAcceleration = acceleration;
+        originalColor = cooldown1.GetComponent<MeshRenderer>().materials[1].GetColor("_EmissionColor");
     }
 
     // Update is called once per frame
@@ -108,14 +78,28 @@ public class PlayerControl : MonoBehaviour
         {
             bumpaxis = Input.GetAxis(fire1);
             bumpLock = true;
+            
             if (Time.time - lastBumpTime > bumpCoolDown)
             {
                 lastBumpTime = Time.time;
                 bump.TriggerBump();
+
+                cooldown1.GetComponent<MeshRenderer>().materials[1].SetColor("_EmissionColor", Color.black);
+                cooldown2.GetComponent<MeshRenderer>().materials[1].SetColor("_EmissionColor", Color.black);
             }
         }
         if (Input.GetButtonUp(fire1) && bumpLock)
             bumpLock = false;
+        if ((Time.time - lastBumpTime) < bumpCoolDown) {
+            Color transitionColor = Color.black + originalColor * (Time.time - lastBumpTime) / bumpCoolDown;
+            cooldown1.GetComponent<MeshRenderer>().materials[1].SetColor("_EmissionColor",transitionColor);
+            cooldown2.GetComponent<MeshRenderer>().materials[1].SetColor("_EmissionColor",transitionColor);
+        }
+        
+        
+
+
+
         force += Vector3.ClampMagnitude(force, acceleration);
         rb.AddForce(force);
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxVelocity);
@@ -124,53 +108,31 @@ public class PlayerControl : MonoBehaviour
         //    rb.AddForce(Vector3.zero, ForceMode.VelocityChange);
         //}
 
-        RightStickInput = new Vector2(Input.GetAxis(rightXAxis), Input.GetAxis(rightYAxis));
-        if (RightStickInput.magnitude < RightStickDeadzone)
+    public void SetBoost(bool input)
+    {
+        if(input)
         {
-            RightStickInput = Vector2.zero;
+            if(!isBoosted)
+            {
+                acceleration += speedBoost;
+                isBoosted = input;
+            }
         }
         else
         {
-            RightStickInput = RightStickInput.normalized * ((RightStickInput.magnitude - RightStickDeadzone) / (1 - RightStickDeadzone));
-        }
-
-        if (RightStickInput.magnitude >= turnAxisThreshold)
-        {
-            turnVector.y = Mathf.Atan2(RightStickInput.x, -RightStickInput.y) * Mathf.Rad2Deg;
-            StartCoroutine(Turn());
+            if(isBoosted)
+            {
+                isBoosted = false;
+                acceleration -= speedBoost;
+            }
         }
     }
-
-
-    IEnumerator Turn()
-    {
-
-        Quaternion oldRotation = transform.rotation;
-        Quaternion newRotation = new Quaternion();
-        newRotation.eulerAngles = turnVector;
-
-        for (float t = 0.0f; t < 1.0f; t += (turnSpeed * Time.deltaTime))
-        {
-            transform.rotation = Quaternion.Lerp(oldRotation, newRotation, t);
-            yield return null;
-        }
-
-    }
-
-
-
-
-public void Stun()
-    {
-        isStunned = true;
-        stunEndTime = Time.time + stunLength;
-    }
-
     public float bumpaxis;
     private bool bumpLock;
     private bool isStunned;
     private float stunEndTime;
     private float stunLength;
-    public bool isBoosted;
-    public float speedBoost;
 }
+
+//Color originalColor1 = cooldown1.GetComponent<MeshRenderer>().materials[1].GetColor("_EmissionColor");
+//cooldown1.GetComponent<MeshRenderer>().materials[1].SetColor("_EmissionColor", newColor1);

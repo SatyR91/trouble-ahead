@@ -180,7 +180,7 @@ Transform:
   m_GameObject: {fileID: 1355262609683002}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.45, y: 0.45, z: 0.45}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
   - {fileID: 4902483858536224}
   - {fileID: 4300539676758330}
@@ -301,7 +301,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6d6be3e0393ae2a4786a0f064065068a, type: 2}
+  - {fileID: 2100000, guid: d40dda370435a064cbd558a2713b74b5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -343,7 +343,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4, y: 2, z: 4}
+  m_Size: {x: 4, y: 6.74, z: 4}
   m_Center: {x: 0, y: 0.61, z: 0}
 --- !u!95 &95188957548312746
 Animator:
@@ -378,9 +378,13 @@ MonoBehaviour:
   players: []
   owner: {fileID: 0}
   captureTime: 0
+  colors:
+  - {fileID: 2100000, guid: d40dda370435a064cbd558a2713b74b5, type: 2}
+  - {fileID: 2100000, guid: 8442000048e474944bca54439d0b3d61, type: 2}
+  - {fileID: 2100000, guid: 994cb9a0aff766344a48c307363dbace, type: 2}
+  - {fileID: 2100000, guid: ebe7ed493249c7c4987f07fd916e9f6c, type: 2}
   captureLength: 80
   meshRender: {fileID: 23169376493934124}
-  speedBoost: 15
 --- !u!198 &198110385120931706
 ParticleSystem:
   m_ObjectHideFlags: 1

@@ -10,6 +10,7 @@ public class Slot : MonoBehaviour
     public List<Player> players;
     public Player owner;
     public int captureTime = 0;
+    public List<Material> colors;
     public int captureLength = 120;
     public MeshRenderer meshRender;
     // Use this for initialization

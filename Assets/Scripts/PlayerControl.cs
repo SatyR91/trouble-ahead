@@ -7,17 +7,26 @@ public class PlayerControl : MonoBehaviour
 {
     public string leftXAxis;
     public string leftYAxis;
-    //public string rightXAxis;
-    //public string rightYAxis;
+    public string rightXAxis;
+    public string rightYAxis;
     public string fire1;
     public float bumpCoolDown;
     public float lastBumpTime;
     public Bump bump;
 
+    private Vector3 turnVector;
+    public float turnSpeed = 5.0f;
+    private Vector2 RightStickInput;
+    public float RightStickDeadzone = 0.02f;
+    public float turnAxisThreshold = 0.1f;
+
+
     internal void SetAxisName(int id)
     {
         leftXAxis = "L_XAxis_" + id;
         leftYAxis = "L_YAxis_" + id;
+        rightXAxis = "R_XAxis_" + id;
+        rightYAxis = "R_YAxis_" + id;
         fire1 = "RB_" + id;
     }
 
@@ -114,9 +123,44 @@ public class PlayerControl : MonoBehaviour
         //{
         //    rb.AddForce(Vector3.zero, ForceMode.VelocityChange);
         //}
+
+        RightStickInput = new Vector2(Input.GetAxis(rightXAxis), Input.GetAxis(rightYAxis));
+        if (RightStickInput.magnitude < RightStickDeadzone)
+        {
+            RightStickInput = Vector2.zero;
+        }
+        else
+        {
+            RightStickInput = RightStickInput.normalized * ((RightStickInput.magnitude - RightStickDeadzone) / (1 - RightStickDeadzone));
+        }
+
+        if (RightStickInput.magnitude >= turnAxisThreshold)
+        {
+            turnVector.y = Mathf.Atan2(RightStickInput.x, -RightStickInput.y) * Mathf.Rad2Deg;
+            StartCoroutine(Turn());
+        }
     }
 
-    public void Stun()
+
+    IEnumerator Turn()
+    {
+
+        Quaternion oldRotation = transform.rotation;
+        Quaternion newRotation = new Quaternion();
+        newRotation.eulerAngles = turnVector;
+
+        for (float t = 0.0f; t < 1.0f; t += (turnSpeed * Time.deltaTime))
+        {
+            transform.rotation = Quaternion.Lerp(oldRotation, newRotation, t);
+            yield return null;
+        }
+
+    }
+
+
+
+
+public void Stun()
     {
         isStunned = true;
         stunEndTime = Time.time + stunLength;

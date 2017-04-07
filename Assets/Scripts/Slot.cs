@@ -11,7 +11,7 @@ public class Slot : MonoBehaviour
     public Player owner;
     public int captureTime = 0;
     public List<Material> glowMaterials;
-    public int captureLength = 120;
+    //public int captureLength = 120;
     public MeshRenderer meshRender;
     public ColorUsageAttribute test;
     private TimerSystem timersys;
@@ -38,7 +38,7 @@ public class Slot : MonoBehaviour
             if (players.Count == 1 && players[0] != owner)
             {
                 captureTime++;
-                if (captureTime >= captureLength)
+                if (captureTime >= players[0].captureSpeed)
                 {
                     captureTime = 0;
                     owner.patternslots.Remove(this);
@@ -54,7 +54,7 @@ public class Slot : MonoBehaviour
             if (players.Count == 1)
             {
                 captureTime++;
-                if (captureTime >= captureLength)
+                if (captureTime >= players[0].captureSpeed)
                 {
                     PatternCapture(players[0]);
                 }
@@ -64,36 +64,39 @@ public class Slot : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        GameObject parent = other.transform.parent.gameObject;
-        players.Add(other.transform.parent.GetComponent<Player>());
-        // speed up owner
-        if (parent.GetComponent<Player>() == owner)
+      if (other.transform.parent != null)
         {
-            Player p = parent.GetComponent<Player>();
-            // player's speed is not boosted
-            if (!parent.GetComponent<PlayerControl>().isBoosted)
+            GameObject parent = other.transform.parent.gameObject;
+            players.Add(other.transform.parent.GetComponent<Player>());
+            // speed up owner
+            if (parent.GetComponent<Player>() == owner)
             {
-                parent.GetComponent<PlayerControl>().SetBoost(true);
+                Player p = parent.GetComponent<Player>();
+                // player's speed is not boosted
+                if (!parent.GetComponent<PlayerControl>().isBoosted)
+                {
+                    parent.GetComponent<PlayerControl>().SetBoost(true);
+                }
+            }
+            else if (parent.GetComponent<Player>() != owner && parent.GetComponent<PlayerControl>().isBoosted/* != parent.GetComponent<PlayerControl>().basicAcceleration*/)
+            {
+                parent.GetComponent<PlayerControl>().SetBoost(false);
             }
         }
-        else if (parent.GetComponent<Player>() != owner && parent.GetComponent<PlayerControl>().isBoosted/* != parent.GetComponent<PlayerControl>().basicAcceleration*/)
-        {
-            parent.GetComponent<PlayerControl>().SetBoost(false);
-        }
+        
 
     }
 
     void OnTriggerExit(Collider other)
     {
-        // Remove player from players array
-        //if (other.name == "PlayerCenter")
+        if( other.transform.parent != null)
         {
             players.Remove(other.transform.parent.GetComponent<Player>());
 
+            // Reset capture time
+            captureTime = 0;
         }
-
-        // Reset capture time
-        captureTime = 0;
+        
     }
 
     public void Capture(Player p)

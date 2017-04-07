@@ -6,6 +6,8 @@ public class Player : MonoBehaviour {
 
     public int id;
     public Color color;
+    public int captureSpeed;
+
     private void Awake()
     {
         GetComponent<PlayerControl>().SetAxisName(id);

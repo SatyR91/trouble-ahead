@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PatternManager : MonoBehaviour {
-
-    
+public class PatternManager : MonoBehaviour
+{
     public enum PatternType
     {
         horizontalline,
@@ -31,14 +30,14 @@ public class PatternManager : MonoBehaviour {
 
     public List<Slot> CheckForPattern(List<Slot> slots)
     {
-        switch(currentpattern)
+        switch (currentpattern)
         {
             case (PatternType.horizontalline):
-                if(slots.Count >= 4)
+                if (slots.Count >= 4)
                 {
-                    foreach(Slot slot in slots)
+                    foreach (Slot slot in slots)
                     {
-                        if((slots.Find(s => s.x == slot.x + 1 && s.y == slot.y) != null && slots.Find(s => s.x == slot.x +2 && s.y == slot.y) != null && slots.Find(s => s.x == slot.x + 3 && s.y == slot.y) != null))
+                        if ((slots.Find(s => s.x == slot.x + 1 && s.y == slot.y) != null && slots.Find(s => s.x == slot.x + 2 && s.y == slot.y) != null && slots.Find(s => s.x == slot.x + 3 && s.y == slot.y) != null))
                         {
                             Debug.Log("Horizontal Line Pattern complete !");
                             List<Slot> Result = new List<Slot>();
@@ -52,11 +51,11 @@ public class PatternManager : MonoBehaviour {
                 }
                 break;
             case (PatternType.verticalline):
-                if(slots.Count >= 4)
+                if (slots.Count >= 4)
                 {
                     foreach (Slot slot in slots)
                     {
-                        if ((slots.Find(s => s.x == slot.x && s.y == slot.y + 1) != null && slots.Find(s => s.y == slot.y + 2 && s.x == slot.x) != null && slots.Find(s => s.x == slot.x  && s.y == slot.y+3) != null))
+                        if ((slots.Find(s => s.x == slot.x && s.y == slot.y + 1) != null && slots.Find(s => s.y == slot.y + 2 && s.x == slot.x) != null && slots.Find(s => s.x == slot.x && s.y == slot.y + 3) != null))
                         {
                             Debug.Log("Vertical Line Pattern complete !");
                             List<Slot> Result = new List<Slot>();
@@ -70,11 +69,11 @@ public class PatternManager : MonoBehaviour {
                 }
                 break;
             case (PatternType.T):
-                if(slots.Count >= 4)
+                if (slots.Count >= 4)
                 {
-                    foreach(Slot slot in slots)
+                    foreach (Slot slot in slots)
                     {
-                        if((slots.Find(s => s.x == slot.x +1 && s.y == slot.y) != null && slots.Find(s => s.x == slot.x + 1 && s.y == slot.y - 1) != null && slots.Find(s=> s.x == slot.x + 2 && s.y == slot.y) != null))
+                        if ((slots.Find(s => s.x == slot.x + 1 && s.y == slot.y) != null && slots.Find(s => s.x == slot.x + 1 && s.y == slot.y - 1) != null && slots.Find(s => s.x == slot.x + 2 && s.y == slot.y) != null))
                         {
                             Debug.Log("T pattern complete !");
                             List<Slot> Result = new List<Slot>();
@@ -82,6 +81,7 @@ public class PatternManager : MonoBehaviour {
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y));
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y - 1));
                             Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y));
+                            Burst(Result);
                             return Result;
                         }
                     }
@@ -92,7 +92,7 @@ public class PatternManager : MonoBehaviour {
                 {
                     foreach (Slot slot in slots)
                     {
-                        if ((slots.Find(s => s.x == slot.x && s.y == slot.y + 1) != null && slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 1) != null && slots.Find(s => s.x == slot.x  && s.y == slot.y + 2) != null))
+                        if ((slots.Find(s => s.x == slot.x && s.y == slot.y + 1) != null && slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 1) != null && slots.Find(s => s.x == slot.x && s.y == slot.y + 2) != null))
                         {
                             Debug.Log("90 T pattern complete !");
                             List<Slot> Result = new List<Slot>();
@@ -100,6 +100,7 @@ public class PatternManager : MonoBehaviour {
                             Result.Add(slots.Find(s => s.x == slot.x && s.y == slot.y + 1));
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 1));
                             Result.Add(slots.Find(s => s.x == slot.x && s.y == slot.y + 2));
+                            Burst(Result);
                             return Result;
                         }
                     }
@@ -118,6 +119,7 @@ public class PatternManager : MonoBehaviour {
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y));
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 1));
                             Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y));
+                            Burst(Result);
                             return Result;
                         }
                     }
@@ -136,6 +138,7 @@ public class PatternManager : MonoBehaviour {
                             Result.Add(slots.Find(s => s.x == slot.x && s.y == slot.y));
                             Result.Add(slots.Find(s => s.x == slot.x - 1 && s.y == slot.y + 1));
                             Result.Add(slots.Find(s => s.x == slot.x && s.y == slot.y + 2));
+                            Burst(Result);
                             return Result;
                         }
                     }
@@ -182,7 +185,7 @@ public class PatternManager : MonoBehaviour {
                 {
                     foreach (Slot slot in slots)
                     {
-                        if ((slots.Find(s => s.x == slot.x + 1 && s.y == slot.y) != null && slots.Find(s => s.x == slot.x + 2 && s.y == slot.y) != null && slots.Find(s => s.x == slot.x + 2 && s.y == slot.y +1 ) != null))
+                        if ((slots.Find(s => s.x == slot.x + 1 && s.y == slot.y) != null && slots.Find(s => s.x == slot.x + 2 && s.y == slot.y) != null && slots.Find(s => s.x == slot.x + 2 && s.y == slot.y + 1) != null))
                         {
                             Debug.Log("90 L pattern complete !");
                             List<Slot> Result = new List<Slot>();
@@ -200,7 +203,7 @@ public class PatternManager : MonoBehaviour {
                 {
                     foreach (Slot slot in slots)
                     {
-                        if ((slots.Find(s => s.x == slot.x + 1 && s.y == slot.y) != null && slots.Find(s => s.x == slot.x + 1 && s.y == slot.y - 1) != null && slots.Find(s => s.x == slot.x + 1 && s.y == slot.y -2) != null))
+                        if ((slots.Find(s => s.x == slot.x + 1 && s.y == slot.y) != null && slots.Find(s => s.x == slot.x + 1 && s.y == slot.y - 1) != null && slots.Find(s => s.x == slot.x + 1 && s.y == slot.y - 2) != null))
                         {
                             Debug.Log("180 L pattern complete !");
                             List<Slot> Result = new List<Slot>();
@@ -290,7 +293,7 @@ public class PatternManager : MonoBehaviour {
                 {
                     foreach (Slot slot in slots)
                     {
-                        if ((slots.Find(s => s.x == slot.x && s.y == slot.y - 1) != null && slots.Find(s => s.x == slot.x+1 && s.y == slot.y -1) != null && slots.Find(s => s.x == slot.x + 2 && s.y == slot.y - 1) != null))
+                        if ((slots.Find(s => s.x == slot.x && s.y == slot.y - 1) != null && slots.Find(s => s.x == slot.x + 1 && s.y == slot.y - 1) != null && slots.Find(s => s.x == slot.x + 2 && s.y == slot.y - 1) != null))
                         {
                             Debug.Log("270 Flipped L pattern complete !");
                             List<Slot> Result = new List<Slot>();
@@ -308,7 +311,7 @@ public class PatternManager : MonoBehaviour {
                 {
                     foreach (Slot slot in slots)
                     {
-                        if ((slots.Find(s => s.x == slot.x +1 && s.y == slot.y) != null && slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 1) != null && slots.Find(s => s.x == slot.x + 2 && s.y == slot.y + 1) != null))
+                        if ((slots.Find(s => s.x == slot.x + 1 && s.y == slot.y) != null && slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 1) != null && slots.Find(s => s.x == slot.x + 2 && s.y == slot.y + 1) != null))
                         {
                             Debug.Log("S pattern complete !");
                             List<Slot> Result = new List<Slot>();
@@ -316,6 +319,7 @@ public class PatternManager : MonoBehaviour {
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y));
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 1));
                             Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y + 1));
+                            Burst(Result);
                             return Result;
                         }
                     }
@@ -334,6 +338,7 @@ public class PatternManager : MonoBehaviour {
                             Result.Add(slots.Find(s => s.x == slot.x && s.y == slot.y + 1));
                             Result.Add(slots.Find(s => s.x == slot.x - 1 && s.y == slot.y + 1));
                             Result.Add(slots.Find(s => s.x == slot.x - 1 && s.y == slot.y + 2));
+                            Burst(Result);
                             return Result;
                         }
                     }
@@ -343,7 +348,7 @@ public class PatternManager : MonoBehaviour {
                 if (slots.Count >= 4)
                 {
                     foreach (Slot slot in slots)
-                    { 
+                    {
                         if ((slots.Find(s => s.x == slot.x + 1 && s.y == slot.y) != null && slots.Find(s => s.x == slot.x + 1 && s.y == slot.y - 1) != null && slots.Find(s => s.x == slot.x + 2 && s.y == slot.y - 1) != null))
                         {
                             Debug.Log("Flipped S pattern complete !");
@@ -352,6 +357,7 @@ public class PatternManager : MonoBehaviour {
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y));
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y - 1));
                             Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y - 1));
+                            Burst(Result);
                             return Result;
                         }
                     }
@@ -370,6 +376,7 @@ public class PatternManager : MonoBehaviour {
                             Result.Add(slots.Find(s => s.x == slot.x && s.y == slot.y + 1));
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 1));
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 2));
+                            Burst(Result);
                             return Result;
                         }
                     }
@@ -379,5 +386,20 @@ public class PatternManager : MonoBehaviour {
                 break;
         }
         return new List<Slot>();
+    }
+
+    void Burst(List<Slot> slots)
+    {
+        List<Slot> mapSlots = new List<Slot>(GetComponentsInChildren<Slot>());
+        List<Slot> adjacentSlots = new List<Slot>();
+        foreach (Slot slot in slots)
+        {
+            adjacentSlots.AddRange(mapSlots.FindAll(x => x.SqrMagnitude(slot) <= 1f));
+        }
+        Player newOwner = slots[0].owner;
+        foreach (Slot slot in adjacentSlots)
+        {
+            slot.Capture(newOwner);
+        }
     }
 }

@@ -27,7 +27,25 @@ public class PlayerControl : MonoBehaviour
     public float basicAcceleration;
     private float trueAcceleration;
     public float maxVelocity;
-
+    public void SetBoost(bool input)
+    {
+        if(input)
+        {
+            if(!isBoosted)
+            {
+                acceleration += speedBoost;
+                isBoosted = input;
+            }
+        }
+        else
+        {
+            if(isBoosted)
+            {
+                acceleration -= speedBoost;
+                isBoosted = false;
+            }
+        }
+    }
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -109,4 +127,6 @@ public class PlayerControl : MonoBehaviour
     private bool isStunned;
     private float stunEndTime;
     private float stunLength;
+    public bool isBoosted;
+    public float speedBoost;
 }

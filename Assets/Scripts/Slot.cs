@@ -12,7 +12,6 @@ public class Slot : MonoBehaviour
     public int captureTime = 0;
     public int captureLength = 120;
     public MeshRenderer meshRender;
-    public float speedBoost;
     // Use this for initialization
     void Awake()
     {
@@ -59,20 +58,22 @@ public class Slot : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         GameObject parent = other.transform.parent.gameObject;
-         players.Add(other.transform.parent.GetComponent<Player>());
+        players.Add(other.transform.parent.GetComponent<Player>());
         // speed up owner
-        if (parent.GetComponent<Player>() == owner) {
+        if (parent.GetComponent<Player>() == owner)
+        {
             Player p = parent.GetComponent<Player>();
             // player's speed is not boosted
-            if (parent.GetComponent<PlayerControl>().acceleration == parent.GetComponent<PlayerControl>().basicAcceleration)
+            if (!parent.GetComponent<PlayerControl>().isBoosted)
             {
-                parent.GetComponent<PlayerControl>().acceleration += speedBoost;
+                parent.GetComponent<PlayerControl>().SetBoost(true);
             }
         }
-        else if (parent.GetComponent<Player>() != owner && parent.GetComponent<PlayerControl>().acceleration != parent.GetComponent<PlayerControl>().basicAcceleration) {
-            parent.GetComponent<PlayerControl>().acceleration -= speedBoost;
+        else if (parent.GetComponent<Player>() != owner && parent.GetComponent<PlayerControl>().isBoosted/* != parent.GetComponent<PlayerControl>().basicAcceleration*/)
+        {
+            parent.GetComponent<PlayerControl>().SetBoost(false);
         }
-        
+
     }
 
     void OnTriggerExit(Collider other)
@@ -81,19 +82,24 @@ public class Slot : MonoBehaviour
         //if (other.name == "PlayerCenter")
         {
             players.Remove(other.transform.parent.GetComponent<Player>());
-        
+
         }
 
         // Reset capture time
         captureTime = 0;
     }
 
-    void Capture(Player p)
+    public void Capture(Player p)
     {
         meshRender.material.SetColor("_EmissionColor", p.color);
         owner = p;
         PlayCaptureAnimation(p);
-        p.gameObject.GetComponent<PlayerControl>().acceleration += speedBoost;
+        p.gameObject.GetComponent<PlayerControl>().SetBoost(true);
+    }
+
+    public float SqrMagnitude(Slot other)
+    {
+        return Mathf.Pow(other.x - this.x, 2) + Mathf.Pow(other.y - this.y, 2);
     }
 
     void PatternCapture(Player p)
@@ -101,7 +107,7 @@ public class Slot : MonoBehaviour
         meshRender.material.SetColor("_EmissionColor", p.color);
         owner = p;
         PlayCaptureAnimation(p);
-        p.gameObject.GetComponent<PlayerControl>().acceleration += speedBoost;
+        p.gameObject.GetComponent<PlayerControl>().SetBoost(true);
         p.GetComponent<Player>().patternslots.Add(this);
         List<Slot> patternslot = GetComponentInParent<PatternManager>().CheckForPattern(p.GetComponent<Player>().patternslots);
     }
@@ -120,7 +126,8 @@ public class Slot : MonoBehaviour
 
     void PlayCaptureAnimation(Player p)
     {
-        switch (p.id) {
+        switch (p.id)
+        {
             case 1: //green
                 transform.FindChild("Green FXCapture").GetComponent<ParticleSystem>().Play();
                 break;

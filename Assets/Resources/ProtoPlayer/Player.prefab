@@ -173,7 +173,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 1
-  color: {r: 0, g: 0, b: 0, a: 0}
+  color: {r: 0, g: 1, b: 0.08965516, a: 0}
+  patternslots: []
 --- !u!114 &114466856203089358
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -196,6 +197,7 @@ MonoBehaviour:
   basicAcceleration: 20
   maxVelocity: 100
   bumpaxis: 0.016296264
+  speedBoost: 25
 --- !u!114 &114759468926454912
 MonoBehaviour:
   m_ObjectHideFlags: 1

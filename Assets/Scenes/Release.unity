@@ -3487,6 +3487,11 @@ Prefab:
       propertyPath: color.b
       value: 0.6691177
       objectReference: {fileID: 0}
+    - target: {fileID: 114466856203089358, guid: f2c2e9e649c3c9e4298a8870a739f357,
+        type: 2}
+      propertyPath: speedBoost
+      value: 25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f2c2e9e649c3c9e4298a8870a739f357, type: 2}
   m_IsPrefabParent: 0
@@ -4514,6 +4519,11 @@ Prefab:
       propertyPath: color.b
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114466856203089358, guid: f2c2e9e649c3c9e4298a8870a739f357,
+        type: 2}
+      propertyPath: speedBoost
+      value: 25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f2c2e9e649c3c9e4298a8870a739f357, type: 2}
   m_IsPrefabParent: 0
@@ -5192,21 +5202,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114263195360651028, guid: f2c2e9e649c3c9e4298a8870a739f357,
-        type: 2}
-      propertyPath: color.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114263195360651028, guid: f2c2e9e649c3c9e4298a8870a739f357,
-        type: 2}
-      propertyPath: color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114263195360651028, guid: f2c2e9e649c3c9e4298a8870a739f357,
-        type: 2}
-      propertyPath: color.b
-      value: 0.08965516
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f2c2e9e649c3c9e4298a8870a739f357, type: 2}
   m_IsPrefabParent: 0
@@ -5767,7 +5762,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ca8e1c3f926c0c409aee170175a38c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentpattern: verticalline
+  currentpattern: 3
 --- !u!4 &1680744672 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4347874072019122, guid: 5fadcec075ad5314bbfc60fdddb852b8,
@@ -6888,6 +6883,11 @@ Prefab:
         type: 2}
       propertyPath: color.b
       value: 0.049307954
+      objectReference: {fileID: 0}
+    - target: {fileID: 114466856203089358, guid: f2c2e9e649c3c9e4298a8870a739f357,
+        type: 2}
+      propertyPath: speedBoost
+      value: 25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f2c2e9e649c3c9e4298a8870a739f357, type: 2}

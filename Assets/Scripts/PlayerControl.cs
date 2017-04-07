@@ -33,7 +33,7 @@ public class PlayerControl : MonoBehaviour
         bump = GetComponent<Bump>();
         //float idealDrag = acceleration / maxVelocity;
         //rb.drag = idealDrag / (idealDrag * Time.fixedDeltaTime + 1);
-        lastBumpTime = Time.time;
+        lastBumpTime = Time.time - bumpCoolDown - 1f;
     }
 
     // Update is called once per frame
@@ -45,30 +45,30 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetAxis(leftXAxis) > deadZone)
         {
             //hasInput = true;
-            //rb.AddForce(Vector3.right * acceleration);
-            rb.velocity = rb.velocity + trueAcceleration * Vector3.right;
-            Debug.Log("Right");
+            rb.AddForce(Vector3.right * acceleration);
+            //rb.velocity = rb.velocity + trueAcceleration * Vector3.right;
+            //Debug.Log("Right");
         }
         if (Input.GetAxis(leftXAxis) < -deadZone)
         {
             //hasInput = true;
-            //rb.AddForce(Vector3.left * acceleration);
-            rb.velocity = rb.velocity + trueAcceleration * Vector3.left;
-            Debug.Log("Left");
+            rb.AddForce(Vector3.left * acceleration);
+            //rb.velocity = rb.velocity + trueAcceleration * Vector3.left;
+            //Debug.Log("Left");
         }
         if (Input.GetAxis(leftYAxis) > deadZone)
         {
             //hasInput = true;
-            //rb.AddForce(Vector3.forward * acceleration);
-            rb.velocity = rb.velocity + trueAcceleration * Vector3.forward;
-            Debug.Log("Up");
+            rb.AddForce(Vector3.forward * acceleration);
+            //rb.velocity = rb.velocity + trueAcceleration * Vector3.forward;
+            //Debug.Log("Up");
         }
         if (Input.GetAxis(leftYAxis) < -deadZone)
         {
             //hasInput = true;
-            //rb.AddForce(Vector3.back * acceleration);
-            rb.velocity = rb.velocity + trueAcceleration * Vector3.back;
-            Debug.Log("Down");
+            rb.AddForce(Vector3.back * acceleration);
+            //rb.velocity = rb.velocity + trueAcceleration * Vector3.back;
+            //Debug.Log("Down");
         }
         if (Input.GetAxis(fire1) > 0f)
         {

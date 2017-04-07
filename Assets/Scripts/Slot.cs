@@ -12,6 +12,7 @@ public class Slot : MonoBehaviour
     public int captureTime = 0;
     public int captureLength = 120;
     public MeshRenderer meshRender;
+    public float speedBoost;
     // Use this for initialization
     void Awake()
     {
@@ -35,6 +36,7 @@ public class Slot : MonoBehaviour
                     Neutral();
                 }
             }
+
         }
         // if not already captured
         else
@@ -55,10 +57,21 @@ public class Slot : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        //if (other.name == "PlayerCenter")
-        {
-            players.Add(other.transform.parent.GetComponent<Player>());
+        GameObject parent = other.transform.parent.gameObject;
+         players.Add(other.transform.parent.GetComponent<Player>());
+        // speed up owner
+        if (parent.GetComponent<Player>() == owner) {
+            Player p = parent.GetComponent<Player>();
+            // player's speed is not boosted
+            if (parent.GetComponent<PlayerControl>().acceleration == parent.GetComponent<PlayerControl>().basicAcceleration)
+            {
+                parent.GetComponent<PlayerControl>().acceleration += speedBoost;
+            }
         }
+        else if (parent.GetComponent<Player>() != owner && parent.GetComponent<PlayerControl>().acceleration != parent.GetComponent<PlayerControl>().basicAcceleration) {
+            parent.GetComponent<PlayerControl>().acceleration -= speedBoost;
+        }
+        
     }
 
     void OnTriggerExit(Collider other)
@@ -70,7 +83,6 @@ public class Slot : MonoBehaviour
         
         }
 
-
         // Reset capture time
         captureTime = 0;
     }
@@ -80,6 +92,7 @@ public class Slot : MonoBehaviour
         meshRender.material.SetColor("_EmissionColor", p.color);
         owner = p;
         PlayCaptureAnimation(p);
+        p.gameObject.GetComponent<PlayerControl>().acceleration += speedBoost;
     }
 
     void Contest()

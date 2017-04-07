@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 1
-  color: {r: 0.026876237, g: 0.7794118, b: 0, a: 0}
+  color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &114466856203089358
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -185,16 +185,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45eb982062967b945b379abd68ab66d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftXAxis: Horizontal
-  leftYAxis: Vertical
-  fire1: 
+  leftXAxis: L_XAxis_1
+  leftYAxis: L_YAxis_1
+  fire1: RB_1
   bumpCoolDown: 3
-  lastBumpTime: 0
-  bump: {fileID: 0}
+  lastBumpTime: 2.6
+  bump: {fileID: 114759468926454912}
   deadZone: 0.1
-  acceleration: 15
-  maxVelocity: 30
-  bumpaxis: 0
+  acceleration: 20
+  basicAcceleration: 20
+  maxVelocity: 100
+  bumpaxis: 0.016296264
 --- !u!114 &114759468926454912
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -206,8 +207,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4396d170fb5726e4986d4f1964f6e491, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0
-  power: 15
+  radius: 4
+  power: 40
   bumperAnimations:
   - {fileID: 198888765497061124, guid: 64382df94c3fcfe42992ad8a0fc08a78, type: 2}
   - {fileID: 198815189651901316, guid: 9d76bd2bb35d6664395c86200731383f, type: 2}
@@ -219,7 +220,7 @@ SphereCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1230251509746512}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: a2a2c930ac1983a41970e05633728e02, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -304,7 +305,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 375561391
+  randomSeed: 371281343
   InitialModule:
     serializedVersion: 3
     enabled: 1

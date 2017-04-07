@@ -378,8 +378,9 @@ MonoBehaviour:
   players: []
   owner: {fileID: 0}
   captureTime: 0
-  captureLength: 120
+  captureLength: 80
   meshRender: {fileID: 23169376493934124}
+  speedBoost: 15
 --- !u!198 &198110385120931706
 ParticleSystem:
   m_ObjectHideFlags: 1

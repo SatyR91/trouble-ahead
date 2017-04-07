@@ -7506,6 +7506,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7068a59254ea41f458231c662c41113d, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1816814693 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114388200317429466, guid: 7068a59254ea41f458231c662c41113d,
+    type: 2}
+  m_PrefabInternal: {fileID: 1816814692}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!4 &1830152787 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4347874072019122, guid: 5fadcec075ad5314bbfc60fdddb852b8,
@@ -8480,7 +8486,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position1: {fileID: 1896676420}
   position2: {fileID: 7817743}
-  position3: {fileID: 7817743}
+  position3: {fileID: 1816814693}
   position4: {fileID: 958773542}
   Scoreboard: {fileID: 1613163652}
   Map: {fileID: 1670260513}

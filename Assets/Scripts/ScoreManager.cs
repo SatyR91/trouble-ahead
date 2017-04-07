@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour {
 
-    public Text positionone;
-    public Text positiontwo;
-    public Text positionthree;
-    public Text positionfour;
+    public Text position1;
+    public Text position2;
+    public Text position3;
+    public Text position4;
     public GameObject Scoreboard;
     public GameObject Map;
 
@@ -26,10 +26,10 @@ public class ScoreManager : MonoBehaviour {
         int player2score = slots.FindAll(s => s.owner.id == 2).Count;
         int player3score = slots.FindAll(s => s.owner.id == 3).Count;
         int player4score = slots.FindAll(s => s.owner.id == 4).Count;
-        positionone.text = "Player 1 : " + player1score;
-        positiontwo.text = "Player 2 : " + player2score;
-        positionthree.text = "Player 3 : " + player3score;
-        positionfour.text = "Player 4 : " + player4score;
+        position1.text = "Player 1 : " + player1score;
+        position2.text = "Player 2 : " + player2score;
+        position3.text = "Player 3 : " + player3score;
+        position4.text = "Player 4 : " + player4score;
 
     }
 

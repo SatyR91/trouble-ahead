@@ -11,11 +11,11 @@ public class Slot : MonoBehaviour
     public Player owner;
     public int captureTime = 0;
     public int captureLength = 120;
-
+    public MeshRenderer meshRender;
     // Use this for initialization
     void Awake()
     {
-        GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
+        meshRender.material.EnableKeyword("_EMISSION");
     }
 
     // Update is called once per frame
@@ -75,19 +75,19 @@ public class Slot : MonoBehaviour
 
     void Capture(Player p)
     {
-        GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", p.color);
+        meshRender.material.SetColor("_EmissionColor", p.color);
         owner = p;
     }
 
     void Contest()
     {
 
-        GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", Color.black);
+        meshRender.material.SetColor("_EmissionColor", Color.black);
     }
 
     void Neutral()
     {
         owner = null;
-        GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", Color.black);
+        meshRender.material.SetColor("_EmissionColor", Color.black);
     }
 }

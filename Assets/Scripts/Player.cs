@@ -12,5 +12,5 @@ public class Player : MonoBehaviour {
         GetComponentInChildren<Bump>().SetBumpColor(id);
         
     }
-
+    public List<Slot> patternslots = new List<Slot>(); 
 }

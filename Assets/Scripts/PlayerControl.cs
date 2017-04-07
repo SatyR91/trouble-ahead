@@ -24,6 +24,7 @@ public class PlayerControl : MonoBehaviour
     public float deadZone;
     private Rigidbody rb;
     public float acceleration;
+    public float basicAcceleration;
     private float trueAcceleration;
     public float maxVelocity;
 
@@ -34,6 +35,7 @@ public class PlayerControl : MonoBehaviour
         //float idealDrag = acceleration / maxVelocity;
         //rb.drag = idealDrag / (idealDrag * Time.fixedDeltaTime + 1);
         lastBumpTime = Time.time - bumpCoolDown - 1f;
+        basicAcceleration = acceleration;
     }
 
     // Update is called once per frame
@@ -46,31 +48,32 @@ public class PlayerControl : MonoBehaviour
             return;
         trueAcceleration = acceleration / Time.fixedDeltaTime;
         //hasInput = false;
+        Vector3 force = Vector3.zero;
         if (Input.GetAxis(leftXAxis) > deadZone)
         {
             //hasInput = true;
-            rb.AddForce(Vector3.right * acceleration);
+            force += Vector3.right * acceleration;
             //rb.velocity = rb.velocity + trueAcceleration * Vector3.right;
             //Debug.Log("Right");
         }
         if (Input.GetAxis(leftXAxis) < -deadZone)
         {
             //hasInput = true;
-            rb.AddForce(Vector3.left * acceleration);
+            force += Vector3.left * acceleration;
             //rb.velocity = rb.velocity + trueAcceleration * Vector3.left;
             //Debug.Log("Left");
         }
         if (Input.GetAxis(leftYAxis) > deadZone)
         {
             //hasInput = true;
-            rb.AddForce(Vector3.forward * acceleration);
+            force += Vector3.forward * acceleration;
             //rb.velocity = rb.velocity + trueAcceleration * Vector3.forward;
             //Debug.Log("Up");
         }
         if (Input.GetAxis(leftYAxis) < -deadZone)
         {
             //hasInput = true;
-            rb.AddForce(Vector3.back * acceleration);
+            force += Vector3.back * acceleration;
             //rb.velocity = rb.velocity + trueAcceleration * Vector3.back;
             //Debug.Log("Down");
         }
@@ -86,6 +89,8 @@ public class PlayerControl : MonoBehaviour
         }
         if (Input.GetButtonUp(fire1) && bumpLock)
             bumpLock = false;
+        force += Vector3.ClampMagnitude(force, acceleration);
+        rb.AddForce(force);
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxVelocity);
         //if (!hasInput)
         //{

@@ -6,10 +6,11 @@ public class Player : MonoBehaviour {
 
     public int id;
     public Color color;
-
     private void Awake()
     {
         GetComponent<PlayerControl>().SetAxisName(id);
+        GetComponentInChildren<Bump>().SetBumpColor(id);
+        
     }
 
 }

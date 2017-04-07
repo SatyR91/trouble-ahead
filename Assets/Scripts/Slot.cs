@@ -11,11 +11,12 @@ public class Slot : MonoBehaviour
     public Player owner;
     public int captureTime = 0;
     public int captureLength = 120;
-
+    public MeshRenderer meshRender;
+    public float speedBoost;
     // Use this for initialization
     void Awake()
     {
-        GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
+        meshRender.material.EnableKeyword("_EMISSION");
     }
 
     // Update is called once per frame
@@ -35,6 +36,7 @@ public class Slot : MonoBehaviour
                     Neutral();
                 }
             }
+
         }
         // if not already captured
         else
@@ -55,18 +57,30 @@ public class Slot : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
-        {
-            players.Add(other.GetComponent<Player>());
+        GameObject parent = other.transform.parent.gameObject;
+         players.Add(other.transform.parent.GetComponent<Player>());
+        // speed up owner
+        if (parent.GetComponent<Player>() == owner) {
+            Player p = parent.GetComponent<Player>();
+            // player's speed is not boosted
+            if (parent.GetComponent<PlayerControl>().acceleration == parent.GetComponent<PlayerControl>().basicAcceleration)
+            {
+                parent.GetComponent<PlayerControl>().acceleration += speedBoost;
+            }
         }
+        else if (parent.GetComponent<Player>() != owner && parent.GetComponent<PlayerControl>().acceleration != parent.GetComponent<PlayerControl>().basicAcceleration) {
+            parent.GetComponent<PlayerControl>().acceleration -= speedBoost;
+        }
+        
     }
 
     void OnTriggerExit(Collider other)
     {
         // Remove player from players array
-        if (other.tag == "Player")
+        //if (other.name == "PlayerCenter")
         {
-            players.Remove(other.GetComponent<Player>());
+            players.Remove(other.transform.parent.GetComponent<Player>());
+        
         }
 
         // Reset capture time
@@ -75,19 +89,41 @@ public class Slot : MonoBehaviour
 
     void Capture(Player p)
     {
-        GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", p.color);
+        meshRender.material.SetColor("_EmissionColor", p.color);
         owner = p;
+        PlayCaptureAnimation(p);
+        p.gameObject.GetComponent<PlayerControl>().acceleration += speedBoost;
     }
 
     void Contest()
     {
 
-        GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", Color.black);
+        meshRender.material.SetColor("_EmissionColor", Color.black);
     }
 
     void Neutral()
     {
         owner = null;
-        GetComponent<MeshRenderer>().material.SetColor("_EmissionColor", Color.black);
+        meshRender.material.SetColor("_EmissionColor", Color.black);
+    }
+
+    void PlayCaptureAnimation(Player p)
+    {
+        switch (p.id) {
+            case 1: //green
+                transform.FindChild("Green FXCapture").GetComponent<ParticleSystem>().Play();
+                break;
+            case 2: //red
+                transform.FindChild("Red FXCapture").GetComponent<ParticleSystem>().Play();
+                break;
+            case 3: //blue
+                transform.FindChild("Blue FXCapture").GetComponent<ParticleSystem>().Play();
+                break;
+            case 4: //yellow
+                transform.FindChild("Yellow FXCapture").GetComponent<ParticleSystem>().Play();
+                break;
+            default:
+                break;
+        }
     }
 }

@@ -37,6 +37,11 @@ public class PlayerControl : MonoBehaviour
     private float trueAcceleration;
     public float maxVelocity;
 
+
+    public GameObject cooldown1;
+    public GameObject cooldown2;
+    private Color originalColor;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -45,6 +50,7 @@ public class PlayerControl : MonoBehaviour
         //rb.drag = idealDrag / (idealDrag * Time.fixedDeltaTime + 1);
         lastBumpTime = Time.time - bumpCoolDown - 1f;
         basicAcceleration = acceleration;
+        originalColor = cooldown1.GetComponent<MeshRenderer>().materials[1].GetColor("_EmissionColor");
     }
 
     // Update is called once per frame
@@ -90,14 +96,28 @@ public class PlayerControl : MonoBehaviour
         {
             bumpaxis = Input.GetAxis(fire1);
             bumpLock = true;
+            
             if (Time.time - lastBumpTime > bumpCoolDown)
             {
                 lastBumpTime = Time.time;
                 bump.TriggerBump();
+
+                cooldown1.GetComponent<MeshRenderer>().materials[1].SetColor("_EmissionColor", Color.black);
+                cooldown2.GetComponent<MeshRenderer>().materials[1].SetColor("_EmissionColor", Color.black);
             }
         }
         if (Input.GetButtonUp(fire1) && bumpLock)
             bumpLock = false;
+        if ((Time.time - lastBumpTime) < bumpCoolDown) {
+            Color transitionColor = Color.black + originalColor * (Time.time - lastBumpTime) / bumpCoolDown;
+            cooldown1.GetComponent<MeshRenderer>().materials[1].SetColor("_EmissionColor",transitionColor);
+            cooldown2.GetComponent<MeshRenderer>().materials[1].SetColor("_EmissionColor",transitionColor);
+        }
+        
+        
+
+
+
         force += Vector3.ClampMagnitude(force, acceleration);
         rb.AddForce(force);
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxVelocity);
@@ -154,3 +174,6 @@ public void Stun()
     private float stunEndTime;
     private float stunLength;
 }
+
+//Color originalColor1 = cooldown1.GetComponent<MeshRenderer>().materials[1].GetColor("_EmissionColor");
+//cooldown1.GetComponent<MeshRenderer>().materials[1].SetColor("_EmissionColor", newColor1);

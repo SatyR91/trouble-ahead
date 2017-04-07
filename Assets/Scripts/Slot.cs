@@ -2,22 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Slot : MonoBehaviour {
+public class Slot : MonoBehaviour
+{
 
     public int x;
     public int y;
     public List<Player> players;
     public Player owner;
     public int captureTime = 0;
+    public int captureLength = 120;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Awake()
+    {
         GetComponent<MeshRenderer>().material.EnableKeyword("_EMISSION");
-
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
 
         // Is already captured
         if (owner != null)
@@ -26,7 +29,7 @@ public class Slot : MonoBehaviour {
             if (players.Count == 1 && players[0] != owner)
             {
                 captureTime++;
-                if (captureTime >= 120)
+                if (captureTime >= captureLength)
                 {
                     captureTime = 0;
                     Neutral();
@@ -40,25 +43,29 @@ public class Slot : MonoBehaviour {
             if (players.Count == 1)
             {
                 captureTime++;
-                if (captureTime >= 120)
+                if (captureTime >= captureLength)
                 {
                     Capture(players[0]);
                 }
             }
         }
-        
-        
-	}
 
-    void OnTriggerEnter(Collider other) {
-        if (other.tag == "Player") {
+
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
             players.Add(other.GetComponent<Player>());
         }
     }
 
-    void OnTriggerExit(Collider other) {
+    void OnTriggerExit(Collider other)
+    {
         // Remove player from players array
-        if (other.tag == "Player") {
+        if (other.tag == "Player")
+        {
             players.Remove(other.GetComponent<Player>());
         }
 

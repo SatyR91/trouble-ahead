@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,8 +7,17 @@ public class PlayerControl : MonoBehaviour
 {
     public string leftXAxis;
     public string leftYAxis;
-    public string rightXAxis;
-    public string rightYAxis;
+    //public string rightXAxis;
+    //public string rightYAxis;
+    public string fire1;
+
+    internal void SetAxisName(int id)
+    {
+        leftXAxis = "Horizontal_P" + id;
+        leftYAxis = "Vertical_P" + id;
+        fire1 = "Fire1_P" + id;
+    }
+
     public float deadZone;
     private Rigidbody rb;
     public float acceleration;
@@ -32,24 +42,28 @@ public class PlayerControl : MonoBehaviour
             //hasInput = true;
             //rb.AddForce(Vector3.right * acceleration);
             rb.velocity = rb.velocity + trueAcceleration * Vector3.right;
+            Debug.Log("Right");
         }
         if (Input.GetAxis(leftXAxis) < -deadZone)
         {
             //hasInput = true;
             //rb.AddForce(Vector3.left * acceleration);
             rb.velocity = rb.velocity + trueAcceleration * Vector3.left;
+            Debug.Log("Left");
         }
         if (Input.GetAxis(leftYAxis) > deadZone)
         {
             //hasInput = true;
             //rb.AddForce(Vector3.forward * acceleration);
             rb.velocity = rb.velocity + trueAcceleration * Vector3.forward;
+            Debug.Log("Up");
         }
         if (Input.GetAxis(leftYAxis) < -deadZone)
         {
             //hasInput = true;
             //rb.AddForce(Vector3.back * acceleration);
             rb.velocity = rb.velocity + trueAcceleration * Vector3.back;
+            Debug.Log("Down");
         }
         //if (!hasInput)
         //{

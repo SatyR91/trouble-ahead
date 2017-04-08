@@ -11519,7 +11519,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TimerGUI: {fileID: 560800595}
   pui: {fileID: 0}
-  timeLeft: 130
+  timeLeft: 91
   patternOccurence: 20
   patternResolutionTime: 10
   patternInProgress: 0
@@ -11553,7 +11553,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ExternalWallLeft: {fileID: 1522409794}
   ExternalWallRight: {fileID: 947956137}
-  ExternalWallUp: {fileID: 1618060205}
+  ExternalWallUp: {fileID: 0}
   ExternalWallDown: {fileID: 1458272760}
   InternalWallLeft: {fileID: 755333131}
   InternalWallRight: {fileID: 539816170}

@@ -73,7 +73,7 @@ public class WallManager : MonoBehaviour {
                 InternalWallUp.transform.position = Vector3.Lerp(originalUpInternPosition, originalUpInternPosition + Vector3.back * 2, currentTime / timeToScale);
                 InternalWallDown.transform.position = Vector3.Lerp(originalDownInternPosition, originalDownInternPosition + Vector3.forward * 2, currentTime / timeToScale);
             }
-            else
+            else if (timesscaled <= 6)
             {
                 if(timesscaled == 4)
                 {

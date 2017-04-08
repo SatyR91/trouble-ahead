@@ -35,11 +35,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4846979601475202}
   - component: {fileID: 33372443382644542}
-  - component: {fileID: 65657875225811258}
   - component: {fileID: 23077439872944906}
   - component: {fileID: 65115753443574012}
   m_Layer: 0
-  m_Name: Cube (3)
+  m_Name: ExternUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54,11 +53,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4907139419348362}
   - component: {fileID: 33541003609731506}
-  - component: {fileID: 65248726376799112}
   - component: {fileID: 23374710052978626}
   - component: {fileID: 65547975218798066}
   m_Layer: 0
-  m_Name: Cube (2)
+  m_Name: ExternLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,11 +71,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4858299936542450}
   - component: {fileID: 33911626196443166}
-  - component: {fileID: 65206189259337514}
   - component: {fileID: 23903247786900210}
   - component: {fileID: 65221739838095508}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: ExternDown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92,11 +89,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4989619607338068}
   - component: {fileID: 33912942177684904}
-  - component: {fileID: 65517313252029996}
   - component: {fileID: 23152346747657362}
   - component: {fileID: 65803151993566922}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: ExternRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -109,8 +105,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1171936068639432}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11, y: 0.27145004, z: -11}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 11, y: 0.2, z: -7}
+  m_LocalScale: {x: 0.9877001, y: 1, z: 0.98769945}
   m_Children:
   - {fileID: 4858299936542450}
   - {fileID: 4989619607338068}
@@ -333,19 +329,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 200000, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &65206189259337514
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1533429435544082}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 20000, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65221739838095508
 BoxCollider:
@@ -357,31 +341,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 200000, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &65248726376799112
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1435272352429724}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &65517313252029996
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1749590900460392}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 20000, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65547975218798066
 BoxCollider:
@@ -393,19 +353,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0000002, y: 200000, z: 1.0000002}
-  m_Center: {x: 0, y: 0, z: 0.0000023841858}
---- !u!65 &65657875225811258
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1298230396875508}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 20000, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65803151993566922
 BoxCollider:
@@ -417,5 +365,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0000002, y: 200000, z: 1.0000002}
+  m_Size: {x: 1.0000002, y: 20000, z: 5}
   m_Center: {x: 0, y: 0, z: 0}

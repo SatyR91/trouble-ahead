@@ -95,6 +95,7 @@ public class Shrine : MonoBehaviour
     // Desactivate Shrine
     void DesactivateShrine()
     {
+        GetComponent<ParticleSystem>().Play();
         GetComponent<MeshRenderer>().enabled = false;
         GetComponent<Collider>().enabled = false;
         StartCoroutine(DestroyShrineCoroutine(15));

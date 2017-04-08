@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class Slot : MonoBehaviour
@@ -177,5 +178,23 @@ public class Slot : MonoBehaviour
                 p.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY;
             }
         }
+    }
+
+    public void Flash()
+    {
+        StartCoroutine(FlashCoroutine(0.1f));
+    }
+
+    IEnumerator FlashCoroutine(float waitTime)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            meshRender.material = glowMaterials[0];
+            yield return new WaitForSeconds(waitTime);
+            meshRender.material = glowMaterials[owner.id];
+            DynamicGI.SetEmissive(meshRender, glowMaterials[owner.id].color);
+            yield return new WaitForSeconds(waitTime);
+        }
+        
     }
 }

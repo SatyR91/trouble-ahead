@@ -10,6 +10,7 @@ public class TimerSystem : MonoBehaviour {
     private float timeStarted;
     private bool timerDone;
     public bool patternTime;
+    public PanelInterface pui;
 
     private void Awake()
     {
@@ -33,6 +34,7 @@ public class TimerSystem : MonoBehaviour {
             {
                 patternTime = true;
                 GetComponent<PatternManager>().currentpattern = (PatternManager.PatternType)Random.Range(0, 19);
+                pui.UIUpdate(GetComponent<PatternManager>().currentpattern);
                 Debug.Log("Pattern time in progress");
             }
             else if (CastedTime % 10 == 0 && CastedTime % 20 != 0 && patternTime)

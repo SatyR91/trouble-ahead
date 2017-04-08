@@ -2615,6 +2615,11 @@ Prefab:
       propertyPath: randomSeed
       value: -402373836
       objectReference: {fileID: 0}
+    - target: {fileID: 135622563561155682, guid: 76d22bc20236e464d8803de18dfe9280,
+        type: 2}
+      propertyPath: m_Radius
+      value: 0.7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 76d22bc20236e464d8803de18dfe9280, type: 2}
   m_IsPrefabParent: 0
@@ -3286,7 +3291,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0000002, y: 2000, z: 1.0000002}
+  m_Size: {x: 1.0000002, y: 20000, z: 1.0000002}
   m_Center: {x: 0, y: 0, z: 0.0000023841858}
 --- !u!23 &706614935
 MeshRenderer:
@@ -4044,7 +4049,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 2000, z: 1}
+  m_Size: {x: 1, y: 20000, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &795950787
 MeshRenderer:
@@ -4959,7 +4964,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0000002, y: 2000, z: 1.0000002}
+  m_Size: {x: 1.0000002, y: 200000, z: 1.0000002}
   m_Center: {x: 0, y: 0, z: 0.0000023841858}
 --- !u!1001 &924397472
 Prefab:
@@ -5279,7 +5284,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 2000, z: 1}
+  m_Size: {x: 1, y: 200000, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &953908157
 Prefab:
@@ -7250,6 +7255,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 135090742426448550, guid: fe49046dee1d6ab4e9e89c1f3cc0daeb,
+        type: 2}
+      propertyPath: m_Radius
+      value: 0.7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fe49046dee1d6ab4e9e89c1f3cc0daeb, type: 2}
   m_IsPrefabParent: 0
@@ -7874,7 +7884,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0000002, y: 2000, z: 1.0000002}
+  m_Size: {x: 1.0000002, y: 200000, z: 1.0000002}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1482199387
 Prefab:
@@ -8764,6 +8774,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 135128810574647236, guid: d6d94ad0d8a50bb41911896c9e609c07,
+        type: 2}
+      propertyPath: m_Radius
+      value: 0.7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d6d94ad0d8a50bb41911896c9e609c07, type: 2}
   m_IsPrefabParent: 0
@@ -8859,7 +8874,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 2000, z: 1}
+  m_Size: {x: 1, y: 200000, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1604581090
 Prefab:
@@ -9221,6 +9236,7 @@ GameObject:
   - component: {fileID: 1670260514}
   - component: {fileID: 1670260515}
   - component: {fileID: 1670260516}
+  - component: {fileID: 1670260517}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -9414,6 +9430,20 @@ MonoBehaviour:
   TimerGUI: {fileID: 560800595}
   patternTime: 0
   pui: {fileID: 889134062}
+--- !u!114 &1670260517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1670260513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d71f656a6658c48478e3caa9001d79fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slotsParent: {fileID: 1670260514}
+  shrine: {fileID: 1584749034876244, guid: a31728e8f3803b743a39beb483baede6, type: 2}
+  slots: []
 --- !u!4 &1680744672 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4347874072019122, guid: 5fadcec075ad5314bbfc60fdddb852b8,
@@ -10616,6 +10646,11 @@ Prefab:
     - target: {fileID: 4905416898839710, guid: 051da89e9f527e8439b080976d242545, type: 2}
       propertyPath: m_RootOrder
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 135589372569676366, guid: 051da89e9f527e8439b080976d242545,
+        type: 2}
+      propertyPath: m_Radius
+      value: 0.7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 051da89e9f527e8439b080976d242545, type: 2}
@@ -12065,7 +12100,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 2000, z: 1}
+  m_Size: {x: 1, y: 20000, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &2119295760
 MeshRenderer:
@@ -12169,7 +12204,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0000002, y: 2000, z: 1.0000002}
+  m_Size: {x: 1.0000002, y: 20000, z: 1.0000002}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &2136810679
 MeshRenderer:

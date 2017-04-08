@@ -1,10 +1,12 @@
 fileFormatVersion: 2
 guid: d71f656a6658c48478e3caa9001d79fe
-timeCreated: 1491543799
+timeCreated: 1491616789
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - slotsParent: {instanceID: 0}
+  - shrine: {fileID: 1584749034876244, guid: a31728e8f3803b743a39beb483baede6, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

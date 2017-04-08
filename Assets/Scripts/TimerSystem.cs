@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class TimerSystem : MonoBehaviour {
+public class TimerSystem : MonoBehaviour
+{
 
     public Text TimerGUI;
     public PanelInterface pui;
@@ -23,7 +24,7 @@ public class TimerSystem : MonoBehaviour {
         timerDone = false;
     }
     // Update is called once per frame
-    void Update ()
+    void Update()
     {
         if (Time.time - timeStarted > timeLeft && !timerDone)
         {
@@ -67,25 +68,25 @@ public class TimerSystem : MonoBehaviour {
                 MapAlteration = false;
             }
         }
-	}
+    }
 
     int Randform()
     {
-        int effect = Random.Range(1 , 5);
+        int effect = Random.Range(1, 5);
         if (effect == 1)
         {
             return 1;
         }
         if (effect == 2)
         {
-            return Random.Range(2 , 4);
+            return Random.Range(2, 4);
         }
         if (effect == 3)
         {
-            return Random.Range(4 , 12);
+            return Random.Range(4, 12);
         }
         return Random.Range(12, 20);
-    } 
+    }
 }
 
 //public class TimerSystem : MonoBehaviour

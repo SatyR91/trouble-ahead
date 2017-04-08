@@ -54,7 +54,7 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y));
                             Result.Add(slots.Find(s => s.x == slot.x + 3 && s.y == slot.y));
                             HorIsMine(Result);
-                            GetComponent<TimerSystem>().patternInProgress = false; cleaningNeeded=true; break;
+                            GetComponent<TimerSystem>().patternInProgress = false; cleaningNeeded = true; break;
                         }
                     }
                 }
@@ -73,7 +73,7 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x && s.y == slot.y + 2));
                             Result.Add(slots.Find(s => s.x == slot.x && s.y == slot.y + 3));
                             VertIsMine(Result);
-                            GetComponent<TimerSystem>().patternInProgress = false; cleaningNeeded=true; break;
+                            GetComponent<TimerSystem>().patternInProgress = false; cleaningNeeded = true; break;
                         }
                     }
                 }
@@ -98,7 +98,7 @@ public class PatternManager : MonoBehaviour
                 }
                 break;
 
-                // Ts ans Ss
+            // Ts ans Ss
 
             case (PatternType.T):
                 if (slots.Count >= 4)
@@ -114,7 +114,7 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y - 1));
                             Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y));
                             Burst(Result);
-                            GetComponent<TimerSystem>().patternInProgress = false; cleaningNeeded=true; break;
+                            GetComponent<TimerSystem>().patternInProgress = false; cleaningNeeded = true; break;
                         }
                     }
                 }
@@ -133,7 +133,7 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 1));
                             Result.Add(slots.Find(s => s.x == slot.x && s.y == slot.y + 2));
                             Burst(Result);
-                            GetComponent<TimerSystem>().patternInProgress = false; cleaningNeeded=true; break;
+                            GetComponent<TimerSystem>().patternInProgress = false; cleaningNeeded = true; break;
                         }
                     }
                 }
@@ -152,7 +152,7 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 1));
                             Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y));
                             Burst(Result);
-                            GetComponent<TimerSystem>().patternInProgress = false; cleaningNeeded=true; break;
+                            GetComponent<TimerSystem>().patternInProgress = false; cleaningNeeded = true; break;
                         }
                     }
                 }
@@ -171,7 +171,7 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x - 1 && s.y == slot.y + 1));
                             Result.Add(slots.Find(s => s.x == slot.x && s.y == slot.y + 2));
                             Burst(Result);
-                            GetComponent<TimerSystem>().patternInProgress = false; cleaningNeeded=true; break;
+                            GetComponent<TimerSystem>().patternInProgress = false; cleaningNeeded = true; break;
                         }
                     }
                 }
@@ -190,7 +190,7 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 1));
                             Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y + 1));
                             Burst(Result);
-                            GetComponent<TimerSystem>().patternInProgress = false; cleaningNeeded=true; break;
+                            GetComponent<TimerSystem>().patternInProgress = false; cleaningNeeded = true; break;
                         }
                     }
                 }
@@ -209,7 +209,7 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x - 1 && s.y == slot.y + 1));
                             Result.Add(slots.Find(s => s.x == slot.x - 1 && s.y == slot.y + 2));
                             Burst(Result);
-                            GetComponent<TimerSystem>().patternInProgress = false; cleaningNeeded=true; break;
+                            GetComponent<TimerSystem>().patternInProgress = false; cleaningNeeded = true; break;
                         }
                     }
                 }
@@ -228,7 +228,7 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y - 1));
                             Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y - 1));
                             Burst(Result);
-                            GetComponent<TimerSystem>().patternInProgress = false; cleaningNeeded=true; break;
+                            GetComponent<TimerSystem>().patternInProgress = false; cleaningNeeded = true; break;
                         }
                     }
                 }
@@ -247,13 +247,13 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 1));
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 2));
                             Burst(Result);
-                            GetComponent<TimerSystem>().patternInProgress = false; cleaningNeeded=true; break;
+                            GetComponent<TimerSystem>().patternInProgress = false; cleaningNeeded = true; break;
                         }
                     }
                 }
                 break;
 
-                // Ls
+            // Ls
 
             case (PatternType.L):
                 if (slots.Count >= 4)
@@ -427,6 +427,7 @@ public class PatternManager : MonoBehaviour
             if (slot.owner != slots[0].owner)
                 slot.Capture(newOwner);
         }
+        PatternCompleted(slots);
     }
 
     void VertIsMine(List<Slot> slots)
@@ -440,6 +441,7 @@ public class PatternManager : MonoBehaviour
             if (slot.owner != slots[0].owner)
                 slot.Capture(newOwner);
         }
+        PatternCompleted(slots);
     }
 
     void Burst(List<Slot> slots)
@@ -454,8 +456,9 @@ public class PatternManager : MonoBehaviour
         foreach (Slot slot in adjacentSlots)
         {
             if (slot.owner == null)
-            slot.Capture(newOwner);
+                slot.Capture(newOwner);
         }
+        PatternCompleted(slots);
     }
 
     void Defrag(List<Slot> slots)
@@ -472,6 +475,7 @@ public class PatternManager : MonoBehaviour
             if (slot.owner != null && slot.owner != newOwner)
                 slot.Neutral();
         }
+        PatternCompleted(slots);
     }
 
     void Lock(List<Slot> slots)
@@ -481,6 +485,7 @@ public class PatternManager : MonoBehaviour
             slot.locked = true;
         }
         StartCoroutine(LockCoroutine(timeOfLock, slots));
+        PatternCompleted(slots);
     }
 
     IEnumerator LockCoroutine(float waitTime, List<Slot> slots)
@@ -490,6 +495,18 @@ public class PatternManager : MonoBehaviour
         {
             slot.locked = false;
             slot.SendMessage("Unlock");
+        }
+    }
+
+    void PatternCompleted(List<Slot> slots)
+    {
+        for (int i = 0; i < slots[0].players.Count; i++)
+        {
+            slots[0].players[i].patternslots.Clear();
+        }
+        foreach(Slot s in slots)
+        {
+            s.Flash();
         }
     }
 }

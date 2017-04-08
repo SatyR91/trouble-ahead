@@ -38,6 +38,7 @@ public class PanelInterface : MonoBehaviour
     {
 
         int[,] matrix = ZeroMatrix();
+        GameObject.Find("Console").GetComponent<Console>().UseConsole("Vulnerability Detected.");
         switch (type)
         {
             case (PatternManager.PatternType.verticalline):

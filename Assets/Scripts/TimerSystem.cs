@@ -25,7 +25,7 @@ public class TimerSystem : MonoBehaviour {
 		if(Time.time-timeStarted > timeLeft && !timerDone)
         {
             timerDone = true;
-            TimerGUI.text = "Finish !";
+            TimerGUI.text = "Finish";
             FindObjectOfType<ScoreManager>().TallyScores();
             FindObjectOfType<ScoreManager>().BestPlayer();
         }
@@ -37,7 +37,7 @@ public class TimerSystem : MonoBehaviour {
             {
                 patternInProgress = true;
                 GetComponent<PatternManager>().currentpattern = (PatternManager.PatternType)Randform();
-                pui.UIUpdate(GetComponent<PatternManager>().currentpattern);
+                //pui.UIUpdate(GetComponent<PatternManager>().currentpattern);
                 Debug.Log("Pattern time in progress");
             }
             else if (CastedTime % patternResolutionTime == 0 && CastedTime % patternOccurence != 0 && patternInProgress)

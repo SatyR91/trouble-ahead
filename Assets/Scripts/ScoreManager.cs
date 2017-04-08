@@ -35,10 +35,10 @@ public class ScoreManager : MonoBehaviour {
         player2score = slots.FindAll(s => s.owner.id == 2).Count;
         player3score = slots.FindAll(s => s.owner.id == 3).Count;
         player4score = slots.FindAll(s => s.owner.id == 4).Count;
-        position1.text = "Player 1 : " + player1score;
-        position2.text = "Player 2 : " + player2score;
-        position3.text = "Player 3 : " + player3score;
-        position4.text = "Player 4 : " + player4score;
+        position1.text = "" + player1score;
+        position2.text = "" + player2score;
+        position3.text = "" + player3score;
+        position4.text = "" + player4score;
 
     }
 
@@ -48,32 +48,32 @@ public class ScoreManager : MonoBehaviour {
         int topPlayers = 0;
         if (player1score == maxscore)
         {
-            congratulation.text = "Congratulation, Player 1 !";
+            congratulation.text = "Player 1 wins !";
             congratulation.color = new Color(0f, 0.8f, 0f, 1f);
             topPlayers++;
         }
         if (player2score == maxscore)
         {
-            congratulation.text = "Congratulation, Player 2 !";
+            congratulation.text = "Player 2 wins !";
             congratulation.color = new Color(0.8f, 0f, 0f, 1f);
             topPlayers++;
         }
         if (player4score == maxscore)
         {
-            congratulation.text = "Congratulation, Player 3 !";
+            congratulation.text = "Player 3 wins !";
             congratulation.color = new Color(0f, 0.14f, 0.67f, 1f);
             topPlayers++;
         }
         if (player4score == maxscore)
         {
-            congratulation.text = "Congratulation, Player 4 !";
+            congratulation.text = "Player 4 wins !";
             congratulation.color = new Color(0.85f, 0.8f, 0.05f, 1f);
             topPlayers++;
         }
         if (topPlayers > 1)
         {
             congratulation.text = "It's a tie !";
-            congratulation.color = new Color(0f, 0f, 0f, 1f);
+            congratulation.color = Color.white;
         }
     }
 

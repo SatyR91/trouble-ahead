@@ -23,6 +23,13 @@ public class PanelInterface : MonoBehaviour {
     public Sprite flippedSsprite;
     public Sprite ninetyflippedSsprite;
     public Image patternimage;
+    public Text patternText;
+    public Color transparent;
+
+    void Awake()
+    {
+        UIReset();
+    }
 
     public void UIUpdate(PatternManager.PatternType type)
     {
@@ -88,7 +95,15 @@ public class PanelInterface : MonoBehaviour {
                 break;
             default:
                 break;
-
         }
+        patternimage.GetComponent<Image>().color = Color.white;
+        patternText.GetComponent<Text>().text = "DRAW THIS PATTERN !";
+    }
+
+
+    public void UIReset()
+    {
+        patternimage.GetComponent<Image>().color = transparent;
+        patternText.GetComponent<Text>().text = null;
     }
 }

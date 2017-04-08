@@ -77,7 +77,8 @@ public class PlayerControl : MonoBehaviour
             force += Vector3.back * acceleration;
         }
         orientation = new Vector3(Input.GetAxisRaw(leftXAxis), 0, Input.GetAxisRaw(leftYAxis));
-        transform.forward = orientation;
+        if (orientation.sqrMagnitude > 0.3f)
+            transform.forward = orientation;
         if (Input.GetButtonDown(fire1) && !bumpLock)
         {
             bumpaxis = Input.GetAxis(fire1);
@@ -101,7 +102,7 @@ public class PlayerControl : MonoBehaviour
             cooldown2.GetComponent<MeshRenderer>().materials[1].SetColor("_EmissionColor", transitionColor);
         }
 
-       
+
 
 
 

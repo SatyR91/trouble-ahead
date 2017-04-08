@@ -418,6 +418,7 @@ public class PatternManager : MonoBehaviour
 
     void HorIsMine(List<Slot> slots)
     {
+        GameObject.Find("Console").GetComponent<Console>().UseConsole("Pattern Exploited. Code : Vertical Yield.");
         List<Slot> mapSlots = new List<Slot>(GetComponentsInChildren<Slot>());
         List<Slot> horSlots = new List<Slot>();
         horSlots.AddRange(mapSlots.FindAll(s => s.y == slots[0].y));
@@ -432,6 +433,7 @@ public class PatternManager : MonoBehaviour
 
     void VertIsMine(List<Slot> slots)
     {
+        GameObject.Find("Console").GetComponent<Console>().UseConsole("Pattern Exploited. Code : Horizontal Yield.");
         List<Slot> mapSlots = new List<Slot>(GetComponentsInChildren<Slot>());
         List<Slot> vertSlots = new List<Slot>();
         vertSlots.AddRange(mapSlots.FindAll(s => s.x == slots[0].x));
@@ -446,6 +448,7 @@ public class PatternManager : MonoBehaviour
 
     void Burst(List<Slot> slots)
     {
+        GameObject.Find("Console").GetComponent<Console>().UseConsole("Pattern Exploited. Code : Expand.");
         List<Slot> mapSlots = new List<Slot>(GetComponentsInChildren<Slot>());
         List<Slot> adjacentSlots = new List<Slot>();
         foreach (Slot slot in slots)
@@ -463,6 +466,7 @@ public class PatternManager : MonoBehaviour
 
     void Defrag(List<Slot> slots)
     {
+        GameObject.Find("Console").GetComponent<Console>().UseConsole("Pattern Exploited. Code : Defrag.");
         List<Slot> mapSlots = new List<Slot>(GetComponentsInChildren<Slot>());
         List<Slot> adjacentSlots = new List<Slot>();
         foreach (Slot slot in slots)
@@ -480,6 +484,7 @@ public class PatternManager : MonoBehaviour
 
     void Lock(List<Slot> slots)
     {
+        GameObject.Find("Console").GetComponent<Console>().UseConsole("Pattern Exploited. Code : Isolate.");
         foreach (Slot slot in slots)
         {
             slot.locked = true;

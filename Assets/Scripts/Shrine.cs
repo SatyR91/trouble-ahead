@@ -58,6 +58,7 @@ public class Shrine : MonoBehaviour
     // CAPTURE BOOST
     void ActivateCaptureBoost(Player p)
     {
+        GameObject.Find("Console").GetComponent<Console>().UseConsole("Player " + p.id + " has acquired sensitive information. Capture boost enabled.");
         int normalCaptureSpeed = p.captureSpeed;
         p.captureSpeed = newCaptureSpeed;
         StartCoroutine(CaptureBoostCoroutine(2, p, normalCaptureSpeed));
@@ -73,12 +74,14 @@ public class Shrine : MonoBehaviour
     // SUPER BUMP
     void ActivateBumpBoost(Player p)
     {
+        GameObject.Find("Console").GetComponent<Console>().UseConsole("Player " + p.id + " has acquired sensitive information. Bump boost enabled.");
         Bump bump = p.transform.GetComponentInChildren<Bump>();
         bump.superBump = true;
     }
 
     void ActivateBumpShield(Player p)
     {
+        GameObject.Find("Console").GetComponent<Console>().UseConsole("Player " + p.id + " has acquired sensitive information. Shield boost enabled.");
         Bump bump = p.transform.GetComponentInChildren<Bump>();
         bump.bumpShield = true;
         Debug.Log("BumpShield");

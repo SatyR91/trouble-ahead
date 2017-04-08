@@ -22,7 +22,7 @@ public class PlayerControl : MonoBehaviour
         leftYAxis = "L_YAxis_" + id;
         rightXAxis = "R_XAxis_" + id;
         rightYAxis = "R_YAxis_" + id;
-        fire1 = "RB_" + id;
+        fire1 = "A_" + id;
     }
 
     public float deadZone;

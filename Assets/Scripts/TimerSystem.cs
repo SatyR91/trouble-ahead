@@ -72,20 +72,20 @@ public class TimerSystem : MonoBehaviour
 
     int Randform()
     {
-        int effect = Random.Range(1, 5);
+        int effect = Random.Range(0, 5);
         if (effect == 1)
         {
-            return 1;
+            return 0;
         }
         if (effect == 2)
         {
-            return Random.Range(2, 4);
+            return Random.Range(1, 3);
         }
         if (effect == 3)
         {
-            return Random.Range(4, 12);
+            return Random.Range(3, 11);
         }
-        return Random.Range(12, 20);
+        return Random.Range(11, 19);
     }
 }
 

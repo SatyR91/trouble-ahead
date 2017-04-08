@@ -28,6 +28,7 @@ public class PatternManager : MonoBehaviour
     }
     public PatternType currentpattern;
     public bool cleaningNeeded;
+    public float timeOfLock;
 
 
     // Check Pattern
@@ -37,6 +38,8 @@ public class PatternManager : MonoBehaviour
         cleaningNeeded = false;
         switch (currentpattern)
         {
+            // Lines and Block
+
             case (PatternType.horizontalline):
                 if (slots.Count >= 4)
                 {
@@ -50,6 +53,7 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y));
                             Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y));
                             Result.Add(slots.Find(s => s.x == slot.x + 3 && s.y == slot.y));
+                            HorIsMine(Result);
                             GetComponent<TimerSystem>().patternTime = false; cleaningNeeded=true; break;
                         }
                     }
@@ -66,13 +70,36 @@ public class PatternManager : MonoBehaviour
                             List<Slot> Result = new List<Slot>();
                             Result.Add(slot);
                             Result.Add(slots.Find(s => s.x == slot.x && s.y == slot.y + 1));
-                            Result.Add(slots.Find(s => s.y == slot.y + 2 && s.x == slot.x));
+                            Result.Add(slots.Find(s => s.x == slot.x && s.y == slot.y + 2));
                             Result.Add(slots.Find(s => s.x == slot.x && s.y == slot.y + 3));
+                            VertIsMine(Result);
                             GetComponent<TimerSystem>().patternTime = false; cleaningNeeded=true; break;
                         }
                     }
                 }
                 break;
+            case (PatternType.square):
+                if (slots.Count >= 4)
+                {
+                    foreach (Slot slot in slots)
+                    {
+                        if ((slots.Find(s => s.x == slot.x + 1 && s.y == slot.y) != null && slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 1) != null && slots.Find(s => s.x == slot.x && s.y == slot.y + 1) != null))
+                        {
+                            Debug.Log("Square pattern complete !");
+                            List<Slot> Result = new List<Slot>();
+                            Result.Add(slot);
+                            Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y));
+                            Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 1));
+                            Result.Add(slots.Find(s => s.x == slot.x && s.y == slot.y + 1));
+                            Defrag(Result);
+                            GetComponent<TimerSystem>().patternTime = false; cleaningNeeded = true; break;
+                        }
+                    }
+                }
+                break;
+
+                // Ts ans Ss
+
             case (PatternType.T):
                 if (slots.Count >= 4)
                 {
@@ -144,169 +171,6 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x - 1 && s.y == slot.y + 1));
                             Result.Add(slots.Find(s => s.x == slot.x && s.y == slot.y + 2));
                             Burst(Result);
-                            GetComponent<TimerSystem>().patternTime = false; cleaningNeeded=true; break;
-                        }
-                    }
-                }
-                break;
-            case (PatternType.square):
-                if (slots.Count >= 4)
-                {
-                    foreach (Slot slot in slots)
-                    {
-                        if ((slots.Find(s => s.x == slot.x + 1 && s.y == slot.y) != null && slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 1) != null && slots.Find(s => s.x == slot.x && s.y == slot.y + 1) != null))
-                        {
-                            Debug.Log("Square pattern complete !");
-                            List<Slot> Result = new List<Slot>();
-                            Result.Add(slot);
-                            Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y));
-                            Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 1));
-                            Result.Add(slots.Find(s => s.x == slot.x && s.y == slot.y + 1));
-                            Defrag(Result);
-                            GetComponent<TimerSystem>().patternTime = false; cleaningNeeded=true; break;
-                        }
-                    }
-                }
-                break;
-            case (PatternType.L):
-                if (slots.Count >= 4)
-                {
-                    foreach (Slot slot in slots)
-                    {
-                        if ((slots.Find(s => s.x == slot.x - 1 && s.y == slot.y) != null && slots.Find(s => s.x == slot.x - 1 && s.y == slot.y + 1) != null && slots.Find(s => s.x == slot.x - 1 && s.y == slot.y + 2) != null))
-                        {
-                            Debug.Log("L pattern complete !");
-                            List<Slot> Result = new List<Slot>();
-                            Result.Add(slot);
-                            Result.Add(slots.Find(s => s.x == slot.x - 1 && s.y == slot.y));
-                            Result.Add(slots.Find(s => s.x == slot.x - 1 && s.y == slot.y + 1));
-                            Result.Add(slots.Find(s => s.x == slot.x - 1 && s.y == slot.y + 2));
-                            GetComponent<TimerSystem>().patternTime = false; cleaningNeeded=true; break;
-                        }
-                    }
-                }
-                break;
-            case (PatternType.ninetyL):
-                if (slots.Count >= 4)
-                {
-                    foreach (Slot slot in slots)
-                    {
-                        if ((slots.Find(s => s.x == slot.x + 1 && s.y == slot.y) != null && slots.Find(s => s.x == slot.x + 2 && s.y == slot.y) != null && slots.Find(s => s.x == slot.x + 2 && s.y == slot.y + 1) != null))
-                        {
-                            Debug.Log("90 L pattern complete !");
-                            List<Slot> Result = new List<Slot>();
-                            Result.Add(slot);
-                            Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y));
-                            Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y));
-                            Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y + 1));
-                            GetComponent<TimerSystem>().patternTime = false; cleaningNeeded=true; break;
-                        }
-                    }
-                }
-                break;
-            case (PatternType.onehundredeightyL):
-                if (slots.Count >= 4)
-                {
-                    foreach (Slot slot in slots)
-                    {
-                        if ((slots.Find(s => s.x == slot.x + 1 && s.y == slot.y) != null && slots.Find(s => s.x == slot.x + 1 && s.y == slot.y - 1) != null && slots.Find(s => s.x == slot.x + 1 && s.y == slot.y - 2) != null))
-                        {
-                            Debug.Log("180 L pattern complete !");
-                            List<Slot> Result = new List<Slot>();
-                            Result.Add(slot);
-                            Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y));
-                            Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y - 1));
-                            Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y - 2));
-                            GetComponent<TimerSystem>().patternTime = false; cleaningNeeded=true; break;
-                        }
-                    }
-                }
-                break;
-            case (PatternType.twohundredseventyL):
-                if (slots.Count >= 4)
-                {
-                    foreach (Slot slot in slots)
-                    {
-                        if ((slots.Find(s => s.x == slot.x && s.y == slot.y + 1) != null && slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 1) != null && slots.Find(s => s.x == slot.x + 2 && s.y == slot.y + 1) != null))
-                        {
-                            Debug.Log("270 L pattern complete !");
-                            List<Slot> Result = new List<Slot>();
-                            Result.Add(slot);
-                            Result.Add(slots.Find(s => s.x == slot.x && s.y == slot.y + 1));
-                            Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 1));
-                            Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y + 1));
-                            GetComponent<TimerSystem>().patternTime = false; cleaningNeeded=true; break;
-                        }
-                    }
-                }
-                break;
-            case (PatternType.flippedL):
-                if (slots.Count >= 4)
-                {
-                    foreach (Slot slot in slots)
-                    {
-                        if ((slots.Find(s => s.x == slot.x + 1 && s.y == slot.y) != null && slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 1) != null && slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 2) != null))
-                        {
-                            Debug.Log("Flipped L pattern complete !");
-                            List<Slot> Result = new List<Slot>();
-                            Result.Add(slot);
-                            Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y));
-                            Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 1));
-                            Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 2));
-                            GetComponent<TimerSystem>().patternTime = false; cleaningNeeded=true; break;
-                        }
-                    }
-                }
-                break;
-            case (PatternType.ninetyflippedL):
-                if (slots.Count >= 4)
-                {
-                    foreach (Slot slot in slots)
-                    {
-                        if ((slots.Find(s => s.x == slot.x + 1 && s.y == slot.y) != null && slots.Find(s => s.x == slot.x + 2 && s.y == slot.y) != null && slots.Find(s => s.x == slot.x + 2 && s.y == slot.y - 1) != null))
-                        {
-                            Debug.Log("90 Flipped L pattern complete !");
-                            List<Slot> Result = new List<Slot>();
-                            Result.Add(slot);
-                            Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y));
-                            Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y));
-                            Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y - 1));
-                            GetComponent<TimerSystem>().patternTime = false; cleaningNeeded=true; break;
-                        }
-                    }
-                }
-                break;
-            case (PatternType.onehundredeightyflippedL):
-                if (slots.Count >= 4)
-                {
-                    foreach (Slot slot in slots)
-                    {
-                        if ((slots.Find(s => s.x == slot.x && s.y == slot.y + 1) != null && slots.Find(s => s.x == slot.x && s.y == slot.y + 2) != null && slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 2) != null))
-                        {
-                            Debug.Log("180 Flipped L pattern complete !");
-                            List<Slot> Result = new List<Slot>();
-                            Result.Add(slot);
-                            Result.Add(slots.Find(s => s.x == slot.x && s.y == slot.y + 1));
-                            Result.Add(slots.Find(s => s.x == slot.x && s.y == slot.y + 2));
-                            Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 2));
-                            GetComponent<TimerSystem>().patternTime = false; cleaningNeeded=true; break;
-                        }
-                    }
-                }
-                break;
-            case (PatternType.twohundredseventyflippedL):
-                if (slots.Count >= 4)
-                {
-                    foreach (Slot slot in slots)
-                    {
-                        if ((slots.Find(s => s.x == slot.x && s.y == slot.y - 1) != null && slots.Find(s => s.x == slot.x + 1 && s.y == slot.y - 1) != null && slots.Find(s => s.x == slot.x + 2 && s.y == slot.y - 1) != null))
-                        {
-                            Debug.Log("270 Flipped L pattern complete !");
-                            List<Slot> Result = new List<Slot>();
-                            Result.Add(slot);
-                            Result.Add(slots.Find(s => s.x == slot.x && s.y == slot.y - 1));
-                            Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y - 1));
-                            Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y - 1));
                             GetComponent<TimerSystem>().patternTime = false; cleaningNeeded=true; break;
                         }
                     }
@@ -388,6 +252,153 @@ public class PatternManager : MonoBehaviour
                     }
                 }
                 break;
+
+                // Ls
+
+            case (PatternType.L):
+                if (slots.Count >= 4)
+                {
+                    foreach (Slot slot in slots)
+                    {
+                        if ((slots.Find(s => s.x == slot.x - 1 && s.y == slot.y) != null && slots.Find(s => s.x == slot.x - 1 && s.y == slot.y + 1) != null && slots.Find(s => s.x == slot.x - 1 && s.y == slot.y + 2) != null))
+                        {
+                            Debug.Log("L pattern complete !");
+                            List<Slot> Result = new List<Slot>();
+                            Result.Add(slot);
+                            Result.Add(slots.Find(s => s.x == slot.x - 1 && s.y == slot.y));
+                            Result.Add(slots.Find(s => s.x == slot.x - 1 && s.y == slot.y + 1));
+                            Result.Add(slots.Find(s => s.x == slot.x - 1 && s.y == slot.y + 2));
+                            GetComponent<TimerSystem>().patternTime = false; cleaningNeeded = true; break;
+                        }
+                    }
+                }
+                break;
+            case (PatternType.ninetyL):
+                if (slots.Count >= 4)
+                {
+                    foreach (Slot slot in slots)
+                    {
+                        if ((slots.Find(s => s.x == slot.x + 1 && s.y == slot.y) != null && slots.Find(s => s.x == slot.x + 2 && s.y == slot.y) != null && slots.Find(s => s.x == slot.x + 2 && s.y == slot.y + 1) != null))
+                        {
+                            Debug.Log("90 L pattern complete !");
+                            List<Slot> Result = new List<Slot>();
+                            Result.Add(slot);
+                            Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y));
+                            Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y));
+                            Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y + 1));
+                            GetComponent<TimerSystem>().patternTime = false; cleaningNeeded = true; break;
+                        }
+                    }
+                }
+                break;
+            case (PatternType.onehundredeightyL):
+                if (slots.Count >= 4)
+                {
+                    foreach (Slot slot in slots)
+                    {
+                        if ((slots.Find(s => s.x == slot.x + 1 && s.y == slot.y) != null && slots.Find(s => s.x == slot.x + 1 && s.y == slot.y - 1) != null && slots.Find(s => s.x == slot.x + 1 && s.y == slot.y - 2) != null))
+                        {
+                            Debug.Log("180 L pattern complete !");
+                            List<Slot> Result = new List<Slot>();
+                            Result.Add(slot);
+                            Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y));
+                            Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y - 1));
+                            Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y - 2));
+                            GetComponent<TimerSystem>().patternTime = false; cleaningNeeded = true; break;
+                        }
+                    }
+                }
+                break;
+            case (PatternType.twohundredseventyL):
+                if (slots.Count >= 4)
+                {
+                    foreach (Slot slot in slots)
+                    {
+                        if ((slots.Find(s => s.x == slot.x && s.y == slot.y + 1) != null && slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 1) != null && slots.Find(s => s.x == slot.x + 2 && s.y == slot.y + 1) != null))
+                        {
+                            Debug.Log("270 L pattern complete !");
+                            List<Slot> Result = new List<Slot>();
+                            Result.Add(slot);
+                            Result.Add(slots.Find(s => s.x == slot.x && s.y == slot.y + 1));
+                            Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 1));
+                            Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y + 1));
+                            GetComponent<TimerSystem>().patternTime = false; cleaningNeeded = true; break;
+                        }
+                    }
+                }
+                break;
+            case (PatternType.flippedL):
+                if (slots.Count >= 4)
+                {
+                    foreach (Slot slot in slots)
+                    {
+                        if ((slots.Find(s => s.x == slot.x + 1 && s.y == slot.y) != null && slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 1) != null && slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 2) != null))
+                        {
+                            Debug.Log("Flipped L pattern complete !");
+                            List<Slot> Result = new List<Slot>();
+                            Result.Add(slot);
+                            Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y));
+                            Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 1));
+                            Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 2));
+                            GetComponent<TimerSystem>().patternTime = false; cleaningNeeded = true; break;
+                        }
+                    }
+                }
+                break;
+            case (PatternType.ninetyflippedL):
+                if (slots.Count >= 4)
+                {
+                    foreach (Slot slot in slots)
+                    {
+                        if ((slots.Find(s => s.x == slot.x + 1 && s.y == slot.y) != null && slots.Find(s => s.x == slot.x + 2 && s.y == slot.y) != null && slots.Find(s => s.x == slot.x + 2 && s.y == slot.y - 1) != null))
+                        {
+                            Debug.Log("90 Flipped L pattern complete !");
+                            List<Slot> Result = new List<Slot>();
+                            Result.Add(slot);
+                            Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y));
+                            Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y));
+                            Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y - 1));
+                            GetComponent<TimerSystem>().patternTime = false; cleaningNeeded = true; break;
+                        }
+                    }
+                }
+                break;
+            case (PatternType.onehundredeightyflippedL):
+                if (slots.Count >= 4)
+                {
+                    foreach (Slot slot in slots)
+                    {
+                        if ((slots.Find(s => s.x == slot.x && s.y == slot.y + 1) != null && slots.Find(s => s.x == slot.x && s.y == slot.y + 2) != null && slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 2) != null))
+                        {
+                            Debug.Log("180 Flipped L pattern complete !");
+                            List<Slot> Result = new List<Slot>();
+                            Result.Add(slot);
+                            Result.Add(slots.Find(s => s.x == slot.x && s.y == slot.y + 1));
+                            Result.Add(slots.Find(s => s.x == slot.x && s.y == slot.y + 2));
+                            Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 2));
+                            GetComponent<TimerSystem>().patternTime = false; cleaningNeeded = true; break;
+                        }
+                    }
+                }
+                break;
+            case (PatternType.twohundredseventyflippedL):
+                if (slots.Count >= 4)
+                {
+                    foreach (Slot slot in slots)
+                    {
+                        if ((slots.Find(s => s.x == slot.x && s.y == slot.y - 1) != null && slots.Find(s => s.x == slot.x + 1 && s.y == slot.y - 1) != null && slots.Find(s => s.x == slot.x + 2 && s.y == slot.y - 1) != null))
+                        {
+                            Debug.Log("270 Flipped L pattern complete !");
+                            List<Slot> Result = new List<Slot>();
+                            Result.Add(slot);
+                            Result.Add(slots.Find(s => s.x == slot.x && s.y == slot.y - 1));
+                            Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y - 1));
+                            Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y - 1));
+                            GetComponent<TimerSystem>().patternTime = false; cleaningNeeded = true; break;
+                        }
+                    }
+                }
+                break;
             default:
                 break;
         }
@@ -396,7 +407,33 @@ public class PatternManager : MonoBehaviour
     }
 
     // Boosts
-    
+
+    void HorIsMine(List<Slot> slots)
+    {
+        List<Slot> mapSlots = new List<Slot>(GetComponentsInChildren<Slot>());
+        List<Slot> horSlots = new List<Slot>();
+        horSlots.AddRange(mapSlots.FindAll(s => s.y == slots[0].y));
+        Player newOwner = slots[0].owner;
+        foreach (Slot slot in horSlots)
+        {
+            if (slot.owner != slots[0].owner)
+                slot.Capture(newOwner);
+        }
+    }
+
+    void VertIsMine(List<Slot> slots)
+    {
+        List<Slot> mapSlots = new List<Slot>(GetComponentsInChildren<Slot>());
+        List<Slot> vertSlots = new List<Slot>();
+        vertSlots.AddRange(mapSlots.FindAll(s => s.x == slots[0].x));
+        Player newOwner = slots[0].owner;
+        foreach (Slot slot in vertSlots)
+        {
+            if (slot.owner != slots[0].owner)
+                slot.Capture(newOwner);
+        }
+    }
+
     void Burst(List<Slot> slots)
     {
         List<Slot> mapSlots = new List<Slot>(GetComponentsInChildren<Slot>());
@@ -421,10 +458,19 @@ public class PatternManager : MonoBehaviour
         {
             adjacentSlots.AddRange(mapSlots.FindAll(x => x.SqrMagnitude(slot) <= 1f));
         }
+        Player newOwner = slots[0].owner;
         foreach (Slot slot in adjacentSlots)
         {
-            if (slot.owner != null && slot.owner != slots[0].owner)
+            if (slot.owner != null && slot.owner != newOwner)
                 slot.Neutral();
+        }
+    }
+
+    void Lock(List<Slot> slots)
+    {
+        foreach (Slot slot in slots)
+        {
+
         }
     }
 }

@@ -41,107 +41,107 @@ public class PanelInterface : MonoBehaviour
         switch (type)
         {
             case (PatternManager.PatternType.verticalline):
-                matrix[1, 0] = 1;
-                matrix[2, 0] = 1;
-                matrix[3, 0] = 1;
+                matrix[0, 1] = 1;
+                matrix[0, 2] = 1;
+                matrix[0, 3] = 1;
                 matrix[0, 0] = 1;
                 //patternimage.GetComponent<Image>().sprite = verticallinesprite;
                 break;
             case (PatternManager.PatternType.horizontalline):
                 matrix[0, 0] = 1;
-                matrix[0, 1] = 1;
-                matrix[0, 2] = 1;
-                matrix[0, 3] = 1;
+                matrix[1, 0] = 1;
+                matrix[2, 0] = 1;
+                matrix[3, 0] = 1;
                 //patternimage.GetComponent<Image>().sprite = horizontallinesprite;
                 break;
             case (PatternManager.PatternType.square):
                 matrix[0, 0] = 1;
-                matrix[0, 1] = 1;
                 matrix[1, 0] = 1;
+                matrix[0, 1] = 1;
                 matrix[1, 1] = 1;
                 //patternimage.GetComponent<Image>().sprite = squaresprite;
                 break;
             case (PatternManager.PatternType.T):
-                matrix[1, 0] = 1;
-                matrix[1, 1] = 1;
-                matrix[1, 2] = 1;
                 matrix[0, 1] = 1;
+                matrix[1, 1] = 1;
+                matrix[2, 1] = 1;
+                matrix[1, 0] = 1;
                 //patternimage.GetComponent<Image>().sprite = Tsprite;
                 break;
             case (PatternManager.PatternType.ninetyT):
                 matrix[1, 1] = 1;
                 matrix[0, 0] = 1;
-                matrix[1, 0] = 1;
-                matrix[2, 0] = 1;
+                matrix[0, 1] = 1;
+                matrix[0, 2] = 1;
                 //patternimage.GetComponent<Image>().sprite = ninetyTsprite;
                 break;
             case (PatternManager.PatternType.onehundredeightyT):
                 matrix[0, 0] = 1;
-                matrix[0, 1] = 1;
-                matrix[0, 2] = 1;
+                matrix[1, 0] = 1;
+                matrix[2, 0] = 1;
                 matrix[1, 1] = 1;
                 //patternimage.GetComponent<Image>().sprite = onehundredeightyTsprite;
                 break;
             case (PatternManager.PatternType.twohundredseventyT):
-                matrix[1, 0] = 1;
                 matrix[0, 1] = 1;
+                matrix[1, 0] = 1;
                 matrix[1, 1] = 1;
-                matrix[2, 1] = 1;
+                matrix[1, 2] = 1;
                 //patternimage.GetComponent<Image>().sprite = twohundredseventyTsprite;
                 break;
             case (PatternManager.PatternType.L):
                 matrix[0, 0] = 1;
-                matrix[1, 0] = 1;
-                matrix[2, 0] = 1;
                 matrix[0, 1] = 1;
+                matrix[0, 2] = 1;
+                matrix[1, 0] = 1;
                 //patternimage.GetComponent<Image>().sprite = Lsprite;
                 break;
             case (PatternManager.PatternType.ninetyL):
                 matrix[0, 0] = 1;
-                matrix[0, 1] = 1;
-                matrix[0, 2] = 1;
-                matrix[1, 2] = 1;
+                matrix[1, 0] = 1;
+                matrix[2, 0] = 1;
+                matrix[2, 1] = 1;
                 //patternimage.GetComponent<Image>().sprite = ninetyLsprite;
                 break;
             case (PatternManager.PatternType.onehundredeightyL):
-                matrix[0, 1] = 1;
-                matrix[1, 1] = 1;
-                matrix[2, 1] = 1;
-                matrix[0, 2] = 1;
-                //patternimage.GetComponent<Image>().sprite = onehundredeightyLsprite;
-                break;
-            case (PatternManager.PatternType.twohundredseventyL):
                 matrix[1, 0] = 1;
                 matrix[1, 1] = 1;
                 matrix[1, 2] = 1;
+                matrix[2, 0] = 1;
+                //patternimage.GetComponent<Image>().sprite = onehundredeightyLsprite;
+                break;
+            case (PatternManager.PatternType.twohundredseventyL):
+                matrix[0, 1] = 1;
+                matrix[1, 1] = 1;
+                matrix[2, 1] = 1;
                 matrix[0, 0] = 1;
                 //patternimage.GetComponent<Image>().sprite = twohundredseventyLsprite;
                 break;
             case (PatternManager.PatternType.flippedL):
-                matrix[0, 1] = 1;
+                matrix[1, 0] = 1;
                 matrix[1, 1] = 1;
-                matrix[2, 1] = 1;
+                matrix[1, 2] = 1;
                 matrix[0, 0] = 1;
                 //patternimage.GetComponent<Image>().sprite = flippedLsprite;
                 break;
             case (PatternManager.PatternType.ninetyflippedL):
-                matrix[1, 0] = 1;
+                matrix[0, 1] = 1;
                 matrix[1, 1] = 1;
-                matrix[1, 2] = 1;
-                matrix[0, 2] = 1;
+                matrix[2, 1] = 1;
+                matrix[2, 0] = 1;
                 //patternimage.GetComponent<Image>().sprite = ninetyflippedLsprite;
                 break;
             case (PatternManager.PatternType.onehundredeightyflippedL):
                 matrix[0, 0] = 1;
-                matrix[1, 0] = 1;
-                matrix[2, 0] = 1;
-                matrix[2, 1] = 1;
+                matrix[0, 1] = 1;
+                matrix[0, 2] = 1;
+                matrix[1, 2] = 1;
                 //patternimage.GetComponent<Image>().sprite = onehundredeightyflippedLsprite;
                 break;
             case (PatternManager.PatternType.twohundredseventyflippedL):
-                matrix[1, 0] = 1;
+                matrix[0, 1] = 1;
                 matrix[1, 1] = 1;
-                matrix[1, 2] = 1;
+                matrix[2, 1] = 1;
                 matrix[0, 0] = 1;
                 //patternimage.GetComponent<Image>().sprite = twohundredseventyflippedLsprite;
                 break;

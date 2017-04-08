@@ -16,6 +16,7 @@ public class TimerSystem : MonoBehaviour
     private bool shrineSpawned;
     public int WallCompaction;
     public bool MapAlteration;
+    public float trueStartTime;
 
     private void Awake()
     {
@@ -26,6 +27,8 @@ public class TimerSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float realTime = timeLeft - (Time.time - timeStarted);
+        int CastedTime = Mathf.CeilToInt(timeLeft - (Time.time - timeStarted));
         if (Time.time - timeStarted > timeLeft && !timerDone)
         {
             timerDone = true;
@@ -33,9 +36,8 @@ public class TimerSystem : MonoBehaviour
             FindObjectOfType<ScoreManager>().TallyScores();
             FindObjectOfType<ScoreManager>().BestPlayer();
         }
-        else if (timeLeft - (Time.time - timeStarted) > 0)
+        else if (realTime > 0 && realTime < trueStartTime)
         {
-            int CastedTime = Mathf.CeilToInt(timeLeft - (Time.time - timeStarted));
             TimerGUI.text = Mathf.CeilToInt(timeLeft - (Time.time - timeStarted)).ToString();
             if (CastedTime % patternOccurence == 0 && !patternInProgress)
             {

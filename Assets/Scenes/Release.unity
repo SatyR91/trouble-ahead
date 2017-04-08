@@ -6800,7 +6800,7 @@ Camera:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_RenderingPath: -1
+  m_RenderingPath: 3
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
@@ -6839,9 +6839,9 @@ MonoBehaviour:
   sepBlurSpread: 2
   quality: 1
   bloomIntensity: 2
-  bloomThreshold: 1.8
+  bloomThreshold: 1.5
   bloomThresholdColor: {r: 1, g: 1, b: 1, a: 0.122}
-  bloomBlurIterations: 1
+  bloomBlurIterations: 2
   hollywoodFlareBlurIterations: 2
   flareRotation: 0
   lensflareMode: 1
@@ -22927,7 +22927,7 @@ Prefab:
     - target: {fileID: 224095665587512368, guid: 7068a59254ea41f458231c662c41113d,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 224148336085160566, guid: 7068a59254ea41f458231c662c41113d,
         type: 2}
@@ -22947,7 +22947,7 @@ Prefab:
     - target: {fileID: 224148336085160566, guid: 7068a59254ea41f458231c662c41113d,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -105
       objectReference: {fileID: 0}
     - target: {fileID: 224331923106492148, guid: 7068a59254ea41f458231c662c41113d,
         type: 2}
@@ -22967,7 +22967,7 @@ Prefab:
     - target: {fileID: 224331923106492148, guid: 7068a59254ea41f458231c662c41113d,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -135
       objectReference: {fileID: 0}
     - target: {fileID: 224791722014891052, guid: 7068a59254ea41f458231c662c41113d,
         type: 2}
@@ -22987,7 +22987,7 @@ Prefab:
     - target: {fileID: 224791722014891052, guid: 7068a59254ea41f458231c662c41113d,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -165
       objectReference: {fileID: 0}
     - target: {fileID: 224026018640658906, guid: 7068a59254ea41f458231c662c41113d,
         type: 2}
@@ -23007,7 +23007,7 @@ Prefab:
     - target: {fileID: 224026018640658906, guid: 7068a59254ea41f458231c662c41113d,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -195
       objectReference: {fileID: 0}
     - target: {fileID: 224886281535033486, guid: 7068a59254ea41f458231c662c41113d,
         type: 2}
@@ -23027,7 +23027,7 @@ Prefab:
     - target: {fileID: 224886281535033486, guid: 7068a59254ea41f458231c662c41113d,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -230
       objectReference: {fileID: 0}
     - target: {fileID: 224940644225934990, guid: 7068a59254ea41f458231c662c41113d,
         type: 2}
@@ -23047,7 +23047,7 @@ Prefab:
     - target: {fileID: 224940644225934990, guid: 7068a59254ea41f458231c662c41113d,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -285
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7068a59254ea41f458231c662c41113d, type: 2}

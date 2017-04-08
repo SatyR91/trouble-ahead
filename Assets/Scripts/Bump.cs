@@ -11,6 +11,8 @@ public class Bump : MonoBehaviour
 
     public float superRadius = 30f;
     public float superPower = 100f;
+    public bool bumpShield = false;
+
     public ParticleSystem[] bumperAnimations;
     private ParticleSystem particleSystem;
     List<GameObject> collidingObjects;
@@ -58,7 +60,7 @@ public class Bump : MonoBehaviour
         {
             Rigidbody rb = hit.GetComponent<Rigidbody>();
 
-            if (rb != null && !rb.gameObject.Equals(owner))
+            if (rb != null && !rb.gameObject.Equals(owner) && !rb.gameObject.GetComponentInChildren<Bump>().bumpShield)
             {
                 rb.AddForce((rb.transform.position - explosionPos).normalized * power, ForceMode.Impulse);
                 hit.GetComponent<PlayerControl>().Stun();

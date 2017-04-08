@@ -32,7 +32,6 @@ public class PlayerControl : MonoBehaviour
     private Rigidbody rb;
     public float acceleration;
     public float basicAcceleration;
-    private float trueAcceleration;
     public float maxVelocity;
 
 
@@ -52,7 +51,6 @@ public class PlayerControl : MonoBehaviour
     }
 
     // Update is called once per frame
-    //public bool hasInput = false;
     private void FixedUpdate()
     {
         if (isStunned && stunEndTime <= Time.time)
@@ -63,36 +61,22 @@ public class PlayerControl : MonoBehaviour
         {
             return;
         }
-        trueAcceleration = acceleration / Time.fixedDeltaTime;
-        //hasInput = false;
         Vector3 force = Vector3.zero;
         if (Input.GetAxis(leftXAxis) > deadZone)
         {
-            //hasInput = true;
             force += Vector3.right * acceleration;
-            //rb.velocity = rb.velocity + trueAcceleration * Vector3.right;
-            //Debug.Log("Right");
         }
         if (Input.GetAxis(leftXAxis) < -deadZone)
         {
-            //hasInput = true;
             force += Vector3.left * acceleration;
-            //rb.velocity = rb.velocity + trueAcceleration * Vector3.left;
-            //Debug.Log("Left");
         }
         if (Input.GetAxis(leftYAxis) > deadZone)
         {
-            //hasInput = true;
             force += Vector3.forward * acceleration;
-            //rb.velocity = rb.velocity + trueAcceleration * Vector3.forward;
-            //Debug.Log("Up");
         }
         if (Input.GetAxis(leftYAxis) < -deadZone)
         {
-            //hasInput = true;
             force += Vector3.back * acceleration;
-            //rb.velocity = rb.velocity + trueAcceleration * Vector3.back;
-            //Debug.Log("Down");
         }
         if (Input.GetButtonDown(fire1) && !bumpLock)
         {
@@ -128,7 +112,6 @@ public class PlayerControl : MonoBehaviour
         //{
         //    rb.AddForce(Vector3.zero, ForceMode.VelocityChange);
         //}
-
         RightStickInput = new Vector2(Input.GetAxis(rightXAxis), Input.GetAxis(rightYAxis));
         if (RightStickInput.magnitude < RightStickDeadzone)
         {
@@ -198,7 +181,3 @@ public class PlayerControl : MonoBehaviour
         }
     }
 }
-
-
-//Color originalColor1 = cooldown1.GetComponent<MeshRenderer>().materials[1].GetColor("_EmissionColor");
-//cooldown1.GetComponent<MeshRenderer>().materials[1].SetColor("_EmissionColor", newColor1);

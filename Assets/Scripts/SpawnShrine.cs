@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnShrine : MonoBehaviour {
@@ -17,12 +16,12 @@ public class SpawnShrine : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
+	/*void Update () {
 		if (Input.GetKeyDown(KeyCode.A))
         {
             Spawn();
         }
-	}
+	}*/
 
     public void Spawn()
     {

@@ -73,7 +73,6 @@ public class Slot : MonoBehaviour
             // speed up owner
             if (parent.GetComponent<Player>() == owner)
             {
-                Player p = parent.GetComponent<Player>();
                 // player's speed is not boosted
                 if (!parent.GetComponent<PlayerControl>().isBoosted)
                 {
@@ -123,7 +122,7 @@ public class Slot : MonoBehaviour
     {
         //meshRender.material.SetColor("_EmissionColor", p.color);
         Capture(p);
-        if (timersys.patternTime)
+        if (timersys.patternInProgress)
         {
             p.GetComponent<Player>().patternslots.Add(this);
             GetComponentInParent<PatternManager>().CheckForPattern(ref p.GetComponent<Player>().patternslots);

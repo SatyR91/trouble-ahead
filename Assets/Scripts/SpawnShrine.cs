@@ -14,14 +14,15 @@ public class SpawnShrine : MonoBehaviour {
             slots.Add(child.GetComponent<Slot>());
         }        
     }
-	
-	// Update is called once per frame
-	/*void Update () {
-		if (Input.GetKeyDown(KeyCode.A))
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
         {
             Spawn();
         }
-	}*/
+    }
 
     public void Spawn()
     {

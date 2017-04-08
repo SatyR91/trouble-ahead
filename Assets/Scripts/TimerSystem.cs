@@ -25,7 +25,7 @@ public class TimerSystem : MonoBehaviour {
 		if(Time.time-timeStarted > timeLeft && !timerDone)
         {
             timerDone = true;
-            TimerGUI.text = "Round over !";
+            TimerGUI.text = "Finish !";
             FindObjectOfType<ScoreManager>().TallyScores();
             FindObjectOfType<ScoreManager>().BestPlayer();
         }

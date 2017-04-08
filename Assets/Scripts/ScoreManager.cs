@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+using System.Linq;
 
 public class ScoreManager : MonoBehaviour {
 
@@ -44,7 +44,8 @@ public class ScoreManager : MonoBehaviour {
 
     public void BestPlayer()
     {
-        int maxscore = Mathf.Max(Mathf.Max(player1score, player2score), Mathf.Max(player3score, player4score));
+        int[] scores = { player1score, player2score, player3score, player4score };
+        int maxscore = scores.Max();
         int topPlayers = 0;
         if (player1score == maxscore)
         {

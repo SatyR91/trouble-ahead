@@ -3012,6 +3012,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &238690868 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114236078688891416, guid: c9286f0cf1e6c9a4496ec20d8534089e,
+    type: 2}
+  m_PrefabInternal: {fileID: 1581446637}
+  m_Script: {fileID: 11500000, guid: c7887bbb997a8e74088451c2882b7ea5, type: 3}
 --- !u!4 &238758609 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4347874072019122, guid: 5fadcec075ad5314bbfc60fdddb852b8,
@@ -18155,6 +18161,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4347874072019122, guid: 5fadcec075ad5314bbfc60fdddb852b8,
     type: 2}
   m_PrefabInternal: {fileID: 1154860124}
+--- !u!224 &1492754501 stripped
+RectTransform:
+  m_PrefabParentObject: {fileID: 224990734754795184, guid: c9286f0cf1e6c9a4496ec20d8534089e,
+    type: 2}
+  m_PrefabInternal: {fileID: 1581446637}
 --- !u!1001 &1495320305
 Prefab:
   m_ObjectHideFlags: 0

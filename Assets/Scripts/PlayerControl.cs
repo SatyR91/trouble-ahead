@@ -14,9 +14,6 @@ public class PlayerControl : MonoBehaviour
 
     private Vector3 turnVector;
     public float turnSpeed = 5.0f;
-    private Vector2 RightStickInput;
-    public float RightStickDeadzone = 0.02f;
-    public float turnAxisThreshold = 0.1f;
 
 
     internal void SetAxisName(int id)
@@ -53,6 +50,7 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
+        Vector3 orientation = Vector3.zero;
         if (isStunned && stunEndTime <= Time.time)
         {
             isStunned = false;
@@ -78,6 +76,8 @@ public class PlayerControl : MonoBehaviour
         {
             force += Vector3.back * acceleration;
         }
+        orientation = new Vector3(Input.GetAxisRaw(leftXAxis), 0, Input.GetAxisRaw(leftYAxis));
+        transform.forward = orientation;
         if (Input.GetButtonDown(fire1) && !bumpLock)
         {
             bumpaxis = Input.GetAxis(fire1);
@@ -101,7 +101,7 @@ public class PlayerControl : MonoBehaviour
             cooldown2.GetComponent<MeshRenderer>().materials[1].SetColor("_EmissionColor", transitionColor);
         }
 
-
+       
 
 
 
@@ -112,38 +112,23 @@ public class PlayerControl : MonoBehaviour
         //{
         //    rb.AddForce(Vector3.zero, ForceMode.VelocityChange);
         //}
-        RightStickInput = new Vector2(Input.GetAxis(rightXAxis), Input.GetAxis(rightYAxis));
-        if (RightStickInput.magnitude < RightStickDeadzone)
-        {
-            RightStickInput = Vector2.zero;
-        }
-        else
-        {
-            RightStickInput = RightStickInput.normalized * ((RightStickInput.magnitude - RightStickDeadzone) / (1 - RightStickDeadzone));
-        }
-
-        if (RightStickInput.magnitude >= turnAxisThreshold)
-        {
-            turnVector.y = Mathf.Atan2(RightStickInput.x, -RightStickInput.y) * Mathf.Rad2Deg;
-            StartCoroutine(Turn());
-        }
     }
 
 
-    IEnumerator Turn()
-    {
+    //IEnumerator Turn()
+    //{
 
-        Quaternion oldRotation = transform.rotation;
-        Quaternion newRotation = new Quaternion();
-        newRotation.eulerAngles = turnVector;
+    //    Quaternion oldRotation = transform.rotation;
+    //    Quaternion newRotation = new Quaternion();
+    //    newRotation.eulerAngles = turnVector;
 
-        for (float t = 0.0f; t < 1.0f; t += (turnSpeed * Time.deltaTime))
-        {
-            transform.rotation = Quaternion.Lerp(oldRotation, newRotation, t);
-            yield return null;
-        }
+    //    for (float t = 0.0f; t < 1.0f; t += (turnSpeed * Time.deltaTime))
+    //    {
+    //        transform.rotation = Quaternion.Lerp(oldRotation, newRotation, t);
+    //        yield return null;
+    //    }
 
-    }
+    //}
 
 
 

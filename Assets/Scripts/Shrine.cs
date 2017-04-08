@@ -11,11 +11,13 @@ public class Shrine : MonoBehaviour
     public int newCaptureSpeed = 2;
     public float bumpShieldDuration = 10f;
 
+    public UIPlayers playersUI;
+
 
     // Use this for initialization
     void Awake()
     {
-
+        
     }
 
     void Start()
@@ -34,17 +36,17 @@ public class Shrine : MonoBehaviour
                 case (1): 
                     // speedCapture
                     ActivateCaptureBoost(other.gameObject.GetComponent<Player>());
-                    Debug.Log("Capture Boost");
+                    other.gameObject.GetComponent<Player>().ui.EnableIcon(2);
                     break;
                 case (2):
                     // superBump
-                    ActivateBumpBoost(other.gameObject.GetComponentInChildren<Player>());
-                    Debug.Log("Super Bump");
+                    ActivateBumpBoost(other.gameObject.GetComponent<Player>());
+                    other.gameObject.GetComponent<Player>().ui.EnableIcon(3);
                     break;
                 case (3):
                     // bumpShield
-                    ActivateBumpShield(other.gameObject.GetComponentInChildren<Player>());
-                    Debug.Log("Bump Shield");
+                    ActivateBumpShield(other.gameObject.GetComponent<Player>());
+                    other.gameObject.GetComponent<Player>().ui.EnableIcon(1);
                     break;
                 default:
                     break;
@@ -65,6 +67,7 @@ public class Shrine : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
         p.captureSpeed = normalCaptureSpeed;
+        p.ui.DisableIcon(2);
     }
 
     // SUPER BUMP
@@ -85,7 +88,8 @@ public class Shrine : MonoBehaviour
     IEnumerator BumpShieldCoroutine(float waitTime, Player p)
     {
         yield return new WaitForSeconds(waitTime);
-        p.GetComponentInChildren<Bump>().bumpShield = false;       
+        p.GetComponentInChildren<Bump>().bumpShield = false;
+        p.ui.DisableIcon(1);    
     }
 
     // Desactivate Shrine

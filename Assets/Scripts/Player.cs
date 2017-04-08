@@ -6,6 +6,7 @@ public class Player : MonoBehaviour {
     public int id;
     public Color color;
     public int captureSpeed;
+    public UIPlayers ui;
 
     private void Awake()
     {

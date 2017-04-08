@@ -268,6 +268,7 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x - 1 && s.y == slot.y));
                             Result.Add(slots.Find(s => s.x == slot.x - 1 && s.y == slot.y + 1));
                             Result.Add(slots.Find(s => s.x == slot.x - 1 && s.y == slot.y + 2));
+                            Lock(Result);
                             GetComponent<TimerSystem>().patternTime = false; cleaningNeeded = true; break;
                         }
                     }
@@ -286,6 +287,7 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y));
                             Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y));
                             Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y + 1));
+                            Lock(Result);
                             GetComponent<TimerSystem>().patternTime = false; cleaningNeeded = true; break;
                         }
                     }
@@ -304,6 +306,7 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y));
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y - 1));
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y - 2));
+                            Lock(Result);
                             GetComponent<TimerSystem>().patternTime = false; cleaningNeeded = true; break;
                         }
                     }
@@ -322,6 +325,7 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x && s.y == slot.y + 1));
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 1));
                             Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y + 1));
+                            Lock(Result);
                             GetComponent<TimerSystem>().patternTime = false; cleaningNeeded = true; break;
                         }
                     }
@@ -340,6 +344,7 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y));
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 1));
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 2));
+                            Lock(Result);
                             GetComponent<TimerSystem>().patternTime = false; cleaningNeeded = true; break;
                         }
                     }
@@ -358,6 +363,7 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y));
                             Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y));
                             Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y - 1));
+                            Lock(Result);
                             GetComponent<TimerSystem>().patternTime = false; cleaningNeeded = true; break;
                         }
                     }
@@ -376,6 +382,7 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x && s.y == slot.y + 1));
                             Result.Add(slots.Find(s => s.x == slot.x && s.y == slot.y + 2));
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y + 2));
+                            Lock(Result);
                             GetComponent<TimerSystem>().patternTime = false; cleaningNeeded = true; break;
                         }
                     }
@@ -394,6 +401,7 @@ public class PatternManager : MonoBehaviour
                             Result.Add(slots.Find(s => s.x == slot.x && s.y == slot.y - 1));
                             Result.Add(slots.Find(s => s.x == slot.x + 1 && s.y == slot.y - 1));
                             Result.Add(slots.Find(s => s.x == slot.x + 2 && s.y == slot.y - 1));
+                            Lock(Result);
                             GetComponent<TimerSystem>().patternTime = false; cleaningNeeded = true; break;
                         }
                     }
@@ -470,7 +478,18 @@ public class PatternManager : MonoBehaviour
     {
         foreach (Slot slot in slots)
         {
+            slot.locked = true;
+        }
+        StartCoroutine(LockCoroutine(timeOfLock, slots));
+    }
 
+    IEnumerator LockCoroutine(float waitTime, List<Slot> slots)
+    {
+        yield return new WaitForSeconds(waitTime);
+        foreach (Slot slot in slots)
+        {
+            slot.locked = false;
+            slot.SendMessage("Unlock");
         }
     }
 }

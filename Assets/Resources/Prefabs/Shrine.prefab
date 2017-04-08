@@ -122,3 +122,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fallSpeed: 20
   activated: 0
+  newCaptureSpeed: 2
+  bumpShieldDuration: 10

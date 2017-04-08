@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4931858183317488}
   - component: {fileID: 198178022971911476}
   - component: {fileID: 199504472506728358}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Red FXCapture
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,8 @@ GameObject:
   - component: {fileID: 4347874072019122}
   - component: {fileID: 65516403645552678}
   - component: {fileID: 114708943485016140}
-  m_Layer: 11
+  - component: {fileID: 65235123464490394}
+  m_Layer: 0
   m_Name: Case
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +73,7 @@ GameObject:
   - component: {fileID: 4250845631565744}
   - component: {fileID: 198110385120931706}
   - component: {fileID: 199348349825509678}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Green FXCapture
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +123,7 @@ GameObject:
   - component: {fileID: 4300539676758330}
   - component: {fileID: 198450268093998736}
   - component: {fileID: 199094133297556468}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Blue FXCapture
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,7 +140,7 @@ GameObject:
   - component: {fileID: 4851169975796254}
   - component: {fileID: 198825581830088996}
   - component: {fileID: 199107527218715538}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Yellow FXCapture
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -333,6 +334,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1319847187397148}
   m_Mesh: {fileID: 4300002, guid: 650cb735bb696254985719062e78f844, type: 3}
+--- !u!65 &65235123464490394
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1355262609683002}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.5, y: 1, z: 4.5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65516403645552678
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -384,7 +397,6 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 8442000048e474944bca54439d0b3d61, type: 2}
   - {fileID: 2100000, guid: 994cb9a0aff766344a48c307363dbace, type: 2}
   - {fileID: 2100000, guid: ebe7ed493249c7c4987f07fd916e9f6c, type: 2}
-  captureLength: 20
   meshRender: {fileID: 23164633015658166}
 --- !u!198 &198110385120931706
 ParticleSystem:

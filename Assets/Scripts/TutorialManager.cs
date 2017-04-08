@@ -15,7 +15,7 @@ public class TutorialManager : MonoBehaviour {
 	void Awake () {
         instructionList.Add("Move your player with Left Stick");
         instructionList.Add("Capture Data Nodes by staying on them");
-        instructionList.Add("Bump other players with RB Button"); 
+        instructionList.Add("Bump other players with A Button"); 
         instructionList.Add("Collect Sensitive Data Folders to gain some boosts : ");
         instructionList.Add("Invulnerability to bumps for 10s");
         instructionList.Add("Faster capture speed for 2s");

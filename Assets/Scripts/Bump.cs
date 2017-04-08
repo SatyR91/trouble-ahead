@@ -29,7 +29,6 @@ public class Bump : MonoBehaviour
         id--;
         particleSystem = bumperAnimations[id];
         particleSystem = Instantiate(particleSystem, transform.position, transform.rotation, transform);
-        //throw new NotImplementedException();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -63,8 +62,6 @@ public class Bump : MonoBehaviour
                 rb.AddForce((rb.transform.position - explosionPos).normalized * power, ForceMode.Impulse);
                 hit.GetComponent<PlayerControl>().Stun();
             }
-
-            //rb.AddExplosionForce(power, explosionPos, radius, 0f, ForceMode.Impulse);
         }
         if (superBump)
         {

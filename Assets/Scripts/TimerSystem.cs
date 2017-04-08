@@ -3,12 +3,16 @@ using UnityEngine.UI;
 
 public class TimerSystem : MonoBehaviour {
 
-    public float timeLeft;
     public Text TimerGUI;
+    public PanelInterface pui;
+    public float timeLeft;
+    public float patternOccurence;
+    public float patternResolutionTime;
+    public bool patternInProgress;
+    public float shrineOccurence;
     private float timeStarted;
     private bool timerDone;
-    public bool patternTime;
-    public PanelInterface pui;
+    private bool shrineSpawned;
 
     private void Awake()
     {
@@ -16,7 +20,8 @@ public class TimerSystem : MonoBehaviour {
         timerDone = false;
     }
     // Update is called once per frame
-    void Update () {
+    void Update ()
+    {
 		if(Time.time-timeStarted > timeLeft && !timerDone)
         {
             timerDone = true;
@@ -28,18 +33,43 @@ public class TimerSystem : MonoBehaviour {
         {
             int CastedTime = Mathf.CeilToInt(timeLeft - (Time.time - timeStarted));
             TimerGUI.text = Mathf.CeilToInt(timeLeft - (Time.time-timeStarted)).ToString();
-            if (CastedTime % 20 == 0 && !patternTime)
+            if (CastedTime % patternOccurence == 0 && !patternInProgress)
             {
-                patternTime = true;
-                GetComponent<PatternManager>().currentpattern = (PatternManager.PatternType)Random.Range(0, 19);
+                patternInProgress = true;
+                GetComponent<PatternManager>().currentpattern = (PatternManager.PatternType)Randform();
                 pui.UIUpdate(GetComponent<PatternManager>().currentpattern);
                 Debug.Log("Pattern time in progress");
             }
-            else if (CastedTime % 10 == 0 && CastedTime % 20 != 0 && patternTime)
+            else if (CastedTime % patternResolutionTime == 0 && CastedTime % patternOccurence != 0 && patternInProgress)
             {
-                patternTime = false;
+                patternInProgress = false;
                 Debug.Log("Pattern time is over !");
             }
+            if (CastedTime % shrineOccurence == 0 && !shrineSpawned)
+            {
+                GetComponent<SpawnShrine>().Spawn();
+                shrineSpawned = true;
+            }
+            if (CastedTime % (shrineOccurence-1) == 0)
+                shrineSpawned = false;
         }
 	}
+
+    int Randform()
+    {
+        int effect = Random.Range(1 , 5);
+        if (effect == 1)
+        {
+            return 1;
+        }
+        if (effect == 2)
+        {
+            return Random.Range(2 , 4);
+        }
+        if (effect == 3)
+        {
+            return Random.Range(4 , 12);
+        }
+        return Random.Range(12, 20);
+    } 
 }

@@ -29,7 +29,7 @@ public class TimerSystem : MonoBehaviour
         if (Time.time - timeStarted > timeLeft && !timerDone)
         {
             timerDone = true;
-            TimerGUI.text = "Finish";
+            TimerGUI.text = "";
             FindObjectOfType<ScoreManager>().TallyScores();
             FindObjectOfType<ScoreManager>().BestPlayer();
         }

@@ -35,9 +35,11 @@ public class TimerSystem : MonoBehaviour {
                 pui.UIUpdate(GetComponent<PatternManager>().currentpattern);
                 Debug.Log("Pattern time in progress");
             }
-            else if (CastedTime % 10 == 0 && CastedTime % 20 != 0 && patternTime)
+            else if ((CastedTime % 10 == 0 && CastedTime % 20 != 0 && patternTime) || GetComponent<PatternManager>().cleaningNeeded)
             {
                 patternTime = false;
+                pui.UIReset();
+                GetComponent<PatternManager>().cleaningNeeded = false;
                 Debug.Log("Pattern time is over !");
             }
         }

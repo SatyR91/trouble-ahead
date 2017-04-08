@@ -68,6 +68,7 @@ public class Bump : MonoBehaviour
             radius = normalRadius;
             power = normalPower;
             superBump = false;
+            transform.parent.GetComponent<Player>().ui.DisableIcon(3);
         }
     }
 

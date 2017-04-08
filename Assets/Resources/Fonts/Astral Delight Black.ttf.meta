@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: c1b73821670be0342a5fa21039c28f0d
+timeCreated: 1491619216
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Astral Delight Black
+  fontNames:
+  - Astral Delight Black
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

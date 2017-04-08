@@ -190,9 +190,7 @@ public class Slot : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             meshRender.material = glowMaterials[0];
-            Debug.Log("FLASH");
             yield return new WaitForSeconds(waitTime);
-            Debug.Log("wait over");
             meshRender.material = glowMaterials[owner.id];
             DynamicGI.SetEmissive(meshRender, glowMaterials[owner.id].color);
             yield return new WaitForSeconds(waitTime);

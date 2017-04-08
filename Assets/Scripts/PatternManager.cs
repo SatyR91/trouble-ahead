@@ -500,6 +500,10 @@ public class PatternManager : MonoBehaviour
 
     void PatternCompleted(List<Slot> slots)
     {
+        for (int i = 0; i < slots[0].players.Count; i++)
+        {
+            slots[0].players[i].patternslots.Clear();
+        }
         foreach(Slot s in slots)
         {
             s.Flash();

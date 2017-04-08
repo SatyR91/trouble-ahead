@@ -427,6 +427,7 @@ public class PatternManager : MonoBehaviour
             if (slot.owner != slots[0].owner)
                 slot.Capture(newOwner);
         }
+        PatternCompleted(slots);
     }
 
     void VertIsMine(List<Slot> slots)
@@ -440,6 +441,7 @@ public class PatternManager : MonoBehaviour
             if (slot.owner != slots[0].owner)
                 slot.Capture(newOwner);
         }
+        PatternCompleted(slots);
     }
 
     void Burst(List<Slot> slots)
@@ -456,6 +458,7 @@ public class PatternManager : MonoBehaviour
             if (slot.owner == null)
             slot.Capture(newOwner);
         }
+        PatternCompleted(slots);
     }
 
     void Defrag(List<Slot> slots)
@@ -472,6 +475,7 @@ public class PatternManager : MonoBehaviour
             if (slot.owner != null && slot.owner != newOwner)
                 slot.Neutral();
         }
+        PatternCompleted(slots);
     }
 
     void Lock(List<Slot> slots)
@@ -481,6 +485,7 @@ public class PatternManager : MonoBehaviour
             slot.locked = true;
         }
         StartCoroutine(LockCoroutine(timeOfLock, slots));
+        PatternCompleted(slots);
     }
 
     IEnumerator LockCoroutine(float waitTime, List<Slot> slots)
@@ -490,6 +495,14 @@ public class PatternManager : MonoBehaviour
         {
             slot.locked = false;
             slot.SendMessage("Unlock");
+        }
+    }
+
+    void PatternCompleted(List<Slot> slots)
+    {
+        foreach(Slot s in slots)
+        {
+            s.Flash();
         }
     }
 }

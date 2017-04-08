@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Slot : MonoBehaviour
@@ -15,6 +14,9 @@ public class Slot : MonoBehaviour
     public MeshRenderer meshRender;
     public ColorUsageAttribute test;
     private TimerSystem timersys;
+
+    [HideInInspector]
+    public bool locked = false;
     // Use this for initialization
     void Awake()
     {
@@ -51,7 +53,7 @@ public class Slot : MonoBehaviour
         else
         {
             // if only one player is on the slot, begin capture
-            if (players.Count == 1)
+            if (players.Count == 1 && !locked)
             {
                 captureTime++;
                 if (captureTime >= players[0].captureSpeed)
@@ -81,6 +83,10 @@ public class Slot : MonoBehaviour
             else if (parent.GetComponent<Player>() != owner && parent.GetComponent<PlayerControl>().isBoosted/* != parent.GetComponent<PlayerControl>().basicAcceleration*/)
             {
                 parent.GetComponent<PlayerControl>().SetBoost(false);
+            }
+            else if (parent.GetComponent<Player>() != owner && locked)
+            {
+                Stun(parent.GetComponent<Player>());
             }
         }
         
@@ -153,6 +159,24 @@ public class Slot : MonoBehaviour
                 break;
             default:
                 break;
+        }
+    }
+
+    void Stun(Player p)
+    {
+        p.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+    }
+
+    // OnMessageReceived : Unlock
+    void Unlock()
+    {
+        if (players.Count != 0)
+        {
+            foreach( Player p in players)
+            {
+                p.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+                p.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY;
+            }
         }
     }
 }

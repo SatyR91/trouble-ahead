@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Sprites;
+using UnityEngine.SceneManagement;
 
 public class TutorialManager : MonoBehaviour {
 
@@ -29,12 +30,12 @@ public class TutorialManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetButtonDown("A_1") || Input.GetButtonDown("A_2") || Input.GetButtonDown("A_3") || Input.GetButtonDown("A_4"))
         {
             step++;
             if (step > 11)
             {
-                // Load Game Scene
+                SceneManager.LoadScene("Release");
             }
             else
             {

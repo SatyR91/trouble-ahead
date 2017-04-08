@@ -73,23 +73,23 @@ public class WallManager : MonoBehaviour {
                 InternalWallUp.transform.position = Vector3.Lerp(originalUpInternPosition, originalUpInternPosition + Vector3.back * 2, currentTime / timeToScale);
                 InternalWallDown.transform.position = Vector3.Lerp(originalDownInternPosition, originalDownInternPosition + Vector3.forward * 2, currentTime / timeToScale);
             }
-            else if (timesscaled <= 6)
+            else if (timesscaled <= 7 && timesscaled > 4)
             {
-                if(timesscaled == 4)
+                if(timesscaled == 5)
                 {
                     ExternalWallLeft.transform.localScale = Vector3.Lerp(originalLeftExternScale, new Vector3(20.0f, 0.001f, 0.3f), currentTime / timeToScale);
                     ExternalWallRight.transform.localScale = Vector3.Lerp(originalRightExternScale, new Vector3(20.0f, 0.001f, 0.3f), currentTime / timeToScale);
                     ExternalWallUp.transform.localScale = Vector3.Lerp(originalUpExternScale, new Vector3(20.0f, 0.001f, 0.3f), currentTime / timeToScale);
                     ExternalWallDown.transform.localScale = Vector3.Lerp(originalDownExternScale, new Vector3(20.0f, 0.001f, 0.3f), currentTime / timeToScale);
                 }
-                else if (timesscaled == 5)
+                else if (timesscaled == 6)
                 {
                     ExternalWallLeft.transform.localScale = Vector3.Lerp(originalLeftExternScale, new Vector3(16.0f, 0.001f, 0.3f), currentTime / timeToScale);
                     ExternalWallRight.transform.localScale = Vector3.Lerp(originalRightExternScale, new Vector3(16.0f, 0.001f, 0.3f), currentTime / timeToScale);
                     ExternalWallUp.transform.localScale = Vector3.Lerp(originalUpExternScale, new Vector3(16.0f, 0.001f, 0.3f), currentTime / timeToScale);
                     ExternalWallDown.transform.localScale = Vector3.Lerp(originalDownExternScale, new Vector3(16.0f, 0.001f, 0.3f), currentTime / timeToScale);
                 }
-                else if (timesscaled == 6)
+                else if (timesscaled == 7)
                 {
                     ExternalWallLeft.transform.localScale = Vector3.Lerp(originalLeftExternScale, new Vector3(12.0f, 0.001f, 0.3f), currentTime / timeToScale);
                     ExternalWallRight.transform.localScale = Vector3.Lerp(originalRightExternScale, new Vector3(12.0f, 0.001f, 0.3f), currentTime / timeToScale);
